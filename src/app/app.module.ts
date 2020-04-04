@@ -12,7 +12,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ToastrModule } from 'ngx-toastr';
 import {MatListModule} from '@angular/material/list';
-import { HttpConfigInterceptor} from './interceptor/token.interceptor';
+import { AuthInterceptor, TokenInterceptor} from './interceptors/index';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { DatePipe } from '@angular/common';
@@ -56,7 +56,11 @@ import { MatButtonModule } from '@angular/material/button';
     ToastrModule.forRoot(), 
     
   ],
-  providers: [ DatePipe, { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true } ],
+  providers: [ DatePipe, 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

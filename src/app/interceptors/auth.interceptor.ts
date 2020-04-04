@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
-export class AuthHttpInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
     constructor(public _toastr: ToastrService) {}
 intercept(
         req: HttpRequest<any>,
