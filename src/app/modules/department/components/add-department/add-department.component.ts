@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators, FormControl} from '@angular/forms';
-import { CrudService } from 'src/app/shared/service/crud.service';
+import { CrudService, ImageService } from 'src/app/shared/service/index';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,7 +18,7 @@ export class AddDepartmentComponent implements OnInit {
   previewUrl:any = null;
 
  
-  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _toastr: ToastrService) {
+  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService) {
     this.mycontent = `<p>Description Here</p>`;
   }
 
@@ -54,6 +54,7 @@ export class AddDepartmentComponent implements OnInit {
     this.departmentForm = this._fb.group({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('Description here',Validators.required),
+      image_url: '',
       stat: ''
     })
   }
@@ -84,9 +85,9 @@ export class AddDepartmentComponent implements OnInit {
     let formData = new FormData();
     console.log(formData)
     formData.append('image', this.fileData, this.fileData.name);
-    this.studentService.uploadImage(formData).subscribe(data =>{
+    this._imageService.uploadImage(formData).subscribe(data =>{
       let response: any = data
-      this.studentForm.patchValue({
+      this.departmentForm.patchValue({
         image_url: response.data.link
       });
       //this.imgURL = response.link
@@ -95,5 +96,20 @@ export class AddDepartmentComponent implements OnInit {
     })
     this.preview();
   }
+
+
+  preview() {
+    // Show preview 
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.fileData); 
+    reader.onload = (_event) => { 
+      this.previewUrl = reader.result; 
+    }
+    }
 
 }
