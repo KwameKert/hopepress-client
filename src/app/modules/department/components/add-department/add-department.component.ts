@@ -83,7 +83,6 @@ export class AddDepartmentComponent implements OnInit {
   fileProgress(fileInput: any) {
     this.fileData = <File>fileInput.target.files[0];
     let formData = new FormData();
-    console.log(formData)
     formData.append('image', this.fileData, this.fileData.name);
     this._imageService.uploadImage(formData).subscribe(data =>{
       let response: any = data
