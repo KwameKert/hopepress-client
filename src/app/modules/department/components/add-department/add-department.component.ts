@@ -14,6 +14,8 @@ export class AddDepartmentComponent implements OnInit {
   mycontent: string;
   departmentForm : any;
   responseData: any;
+  fileData: File = null;
+  previewUrl:any = null;
 
  
   constructor(private _fb: FormBuilder, private _crudService: CrudService, private _toastr: ToastrService) {
@@ -74,6 +76,24 @@ export class AddDepartmentComponent implements OnInit {
                           timeOut:2000
                         })
                       })
+  }
+
+
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    let formData = new FormData();
+    console.log(formData)
+    formData.append('image', this.fileData, this.fileData.name);
+    this.studentService.uploadImage(formData).subscribe(data =>{
+      let response: any = data
+      this.studentForm.patchValue({
+        image_url: response.data.link
+      });
+      //this.imgURL = response.link
+    }, error=>{
+      console.warn(error)
+    })
+    this.preview();
   }
 
 }

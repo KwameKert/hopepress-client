@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentService {
+export class ImageService {
 
   private clientId: string = environment.image_client_id;
   private url: string = 'https://api.imgur.com/3/image';
