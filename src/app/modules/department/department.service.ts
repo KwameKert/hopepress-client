@@ -11,7 +11,7 @@ export class DepartmentService {
   private clientId: string = environment.image_client_id;
   private url: string = 'https://api.imgur.com/3/image';
 
-  constructor() { }
+  constructor(private _httpClient: HttpClient) { }
 
 
   public uploadImage(data: any){
