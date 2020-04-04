@@ -7,19 +7,21 @@ import {
     HttpEvent,
     HttpErrorResponse
 } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import {tap, map, catchError } from 'rxjs/operators';
 
 
-@Injectable() export class HttpConfigInterceptor implements HttpInterceptor {
+@Injectable() export class TokenInterceptor implements HttpInterceptor {
 
+    constructor(private _toastr: ToastrService){}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
         if(!request.headers.has("Authorization")){
-            
+
             const token: string = localStorage.getItem('churchPressToken');
 
             if (token) {
@@ -31,10 +33,12 @@ import { map, catchError } from 'rxjs/operators';
     
             request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         }
+
+        return next.handle(request);
        
    
 
-        return next.handle(request);
+      //  return next.handle(request);
     }
 
 

@@ -12,7 +12,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ToastrModule } from 'ngx-toastr';
 import {MatListModule} from '@angular/material/list';
-import { HttpConfigInterceptor} from './interceptor/httpconfig.interceptor';
+import { HttpConfigInterceptor} from './interceptor/token.interceptor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { DatePipe } from '@angular/common';
