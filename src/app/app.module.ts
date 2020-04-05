@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { AddLeaderComponent } from './modules/leader/components/add-leader/add-leader.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     SidebarComponent,
     FooterComponent,
     DefaultComponent,
+    AddLeaderComponent,
    
     
   ],
