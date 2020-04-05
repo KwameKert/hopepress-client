@@ -36,7 +36,7 @@
                       </div>
 
                       <div class="float-right">
-                        <button  mat-stroked-button color="primary" class="mr-1" type="submit" >Save Department</button>
+                        <button  mat-stroked-button color="primary" class="mr-1" type="submit" [disabled]="!departmentForm.valid" >Save Department</button>
                       </div>
                 </form> 
             </div>

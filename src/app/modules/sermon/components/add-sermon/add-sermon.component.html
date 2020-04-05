@@ -50,7 +50,7 @@
                       </div>
 
                       <div class="float-right">
-                        <button  mat-stroked-button color="primary" class="mr-5" type="submit" >Save Sermon</button>
+                        <button  mat-stroked-button color="primary" class="mr-5" type="submit" [disabled]="!SermonForm.valid" >Save Sermon</button>
                       </div>
                 </form>
             </div>

@@ -28,6 +28,15 @@ export class AddDepartmentComponent implements OnInit {
    
   }
 
+  loadForm(){
+    this.departmentForm = this._fb.group({
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('Description here',Validators.required),
+      image_url: '',
+      stat: ''
+    })
+  }
+
 
   loadConfig(){
     this.ckeConfig = {
@@ -50,32 +59,17 @@ export class AddDepartmentComponent implements OnInit {
   }
 
 
-  loadForm(){
-    this.departmentForm = this._fb.group({
-      name: new FormControl('', [Validators.required]),
-      description: new FormControl('Description here',Validators.required),
-      image_url: '',
-      stat: ''
-    })
-  }
+ 
 
   saveDepartment(){
     
     this._crudService.addItem(this.departmentForm.value, "department")
                       .subscribe(data => {
                         this.responseData = data;
-                        if(this.responseData.status ==200){
-                          this._toastr.success("Department saved 🙂","",{
-                            timeOut:2000
-                          })
-
-                          this.departmentForm.reset();
-                        }
-
+                        this.departmentForm.reset();
                       }, error => {
-                        this._toastr.info("Oops an error. 🥺","",{
-                          timeOut:2000
-                        })
+
+                      console.warn(error)
                       })
   }
 
