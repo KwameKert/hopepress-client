@@ -2,15 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UpdateLeaderComponent } from './components/update-leader/update-leader.component';
 import { ListLeaderComponent } from './components/list-leader/list-leader.component';
+import { AddLeaderComponent } from './components/add-leader/add-leader.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { LeaderRoutingModule } from './leader-routing.module';
 
 
 
 
 
 @NgModule({
-  declarations: [UpdateLeaderComponent, ListLeaderComponent],
+  declarations: [UpdateLeaderComponent, ListLeaderComponent, AddLeaderComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule,
+    LeaderRoutingModule
   ]
 })
 export class LeaderModule { }
