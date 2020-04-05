@@ -52,6 +52,7 @@ export class UpdateDepartmentComponent implements OnInit {
 
   loadForm(){
     this.departmentForm = this._fb.group({
+      id:'',
       name: new FormControl('', [Validators.required]),
       description: new FormControl('Description here',Validators.required),
       stat: ''
@@ -88,7 +89,6 @@ export class UpdateDepartmentComponent implements OnInit {
 
 
   patchDepartmentForm(department){
-    console.log(department)
     this.departmentForm.patchValue({
       id: department.id,
       name: department.name,
