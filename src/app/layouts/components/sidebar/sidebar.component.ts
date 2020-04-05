@@ -9,6 +9,7 @@ export class SidebarComponent implements OnInit {
 
   sermonLinks: boolean = false;
   departmentLinks: boolean = false;
+  leaderLinks: boolean = false;
   constructor() { }
 
   ngOnInit() {
@@ -20,6 +21,10 @@ export class SidebarComponent implements OnInit {
 
   showDepartmentLinks(){
     this.departmentLinks = !this.departmentLinks;
+  }
+
+  showLeaderLinks(){
+    this.leaderLinks = !this.leaderLinks;
   }
 
 }
