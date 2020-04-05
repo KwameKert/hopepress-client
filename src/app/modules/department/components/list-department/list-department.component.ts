@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatDialog} from '@angular/material/dialog';
-
 import {  MatSnackBar,  } from '@angular/material/snack-bar';
 import {  MatTableDataSource,  } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
@@ -21,18 +20,19 @@ export class ListDepartmentComponent implements OnInit {
   responseData: any;
   showTable: boolean;
   isLoading: boolean ;
+  pageEvent: PageEvent;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor( private _toastr: ToastrService, public dialog: MatDialog, private _crudService: CrudService, private _snackBar: MatSnackBar, private _router: Router) { }
 
   ngOnInit() {
-  
+   
     this.isLoading  = true;
-    this.listDepartments();
+    this.listDepartments(null);
     this.isLoading = false;
   }
 
-  listDepartments(){
+  listDepartments(event?:PageEvent){
     this._crudService.fetchAll("department").subscribe(data=>{
       this.responseData = data;
       if(this.responseData.data != null){

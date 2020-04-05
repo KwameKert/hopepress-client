@@ -60,15 +60,11 @@ export class UpdateDepartmentComponent implements OnInit {
 
 
   loadDepartmentData(){
-
     this._crudService.fetchItem({id: this.departmentId, module: "department"})
                      .subscribe(data=>{
-
-                      this.responseData = data;
-                      if(this.responseData.status ==200){
+                      this.responseData = data;                 
                         this.patchDepartmentForm(this.responseData.data);
-                      }
-
+              
                      }, error =>{
                       this._toastr.info("Oops an error. 🥺","",{
                         timeOut:2000
@@ -79,14 +75,23 @@ export class UpdateDepartmentComponent implements OnInit {
 
 
   saveDepartment(){
+
+    this._crudService.updateItem({data: this.departmentForm.value, module: "department"})
+    .subscribe(data => {
+      this.responseData = data;
+    }, error => {
+
+    console.warn(error)
+    })
     
   }
 
 
   patchDepartmentForm(department){
+    console.log(department)
     this.departmentForm.patchValue({
       id: department.id,
-      title: department.title,
+      name: department.name,
       description: department.description,
       stat : department.stat
     })

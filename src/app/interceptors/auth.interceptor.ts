@@ -18,8 +18,15 @@ intercept(
             tap(evt => {
                 if (evt instanceof HttpResponse) {
                  
-                    if(evt.body && evt.body.status == 200)
+                    if(evt.body && evt.body.status == 200){
                         this._toastr.success(evt.body.message, "Success  🙂", {  timeOut:2000});
+                    }
+
+                    if(evt.body && evt.body.status == 417){
+                        this._toastr.info(evt.body.message, "Unexpected Error  🥺", {  timeOut:3500});
+                    }
+
+                       
                 }
             }),
             catchError((err: any) => {
