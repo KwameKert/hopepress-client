@@ -64,7 +64,7 @@ public doFilter = (value: string) => {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    //  console.log('The dialog was closed');
       // this.animal = result;
     });
   }
@@ -86,7 +86,13 @@ public doFilter = (value: string) => {
         this._snackBar.open("Sermon Deleted 🙂  ", "", {
           duration: 2000,
         });
-        this.listSermons();
+        this.responseData = data;
+        if(this.responseData.data != null){
+          this.responseData = data;
+          this.dataSource = new MatTableDataSource(this.responseData.data);
+          this.dataSource.paginator = this.paginator;
+          this.showTable=true;
+        }
 
       }else{
 

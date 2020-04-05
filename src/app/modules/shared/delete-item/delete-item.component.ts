@@ -14,7 +14,7 @@ export class DeleteItemComponent implements OnInit {
 
   ngOnInit() {
   
-    console.log(this.data);
+   // console.log(this.data);
   }
 
   close(){
@@ -24,7 +24,14 @@ export class DeleteItemComponent implements OnInit {
 
   delete(){
     this._crudService.deleteItem(this.data).subscribe(data=>{
-      this.dialogRef.close({event:true});
+      let response: any = data;
+
+      let evt = {
+        data: response.data,
+        event: true
+
+      }
+      this.dialogRef.close(evt);
     }, error=>{
       console.warn(error);
       this.dialogRef.close({event:false});

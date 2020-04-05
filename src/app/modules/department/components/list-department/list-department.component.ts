@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CrudService } from 'src/app/shared/service/crud.service';
 import { Router } from '@angular/router';
 import { DeleteItemComponent } from 'src/app/modules/shared/delete-item/delete-item.component';
+import { ViewDepartmentComponent } from '../view-department/view-department.component';
 
 @Component({
   selector: 'app-list-department',
@@ -55,23 +56,24 @@ public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  // openSermon(sermon): void {
-  //   const dialogRef = this.dialog.open(ViewSermonComponent, {
-  //     width: '850px',
-  //     height: '380px',
-  //     data: sermon
-  //   });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //     // this.animal = result;
-  //   });
-  // }
+  openDepartment(department): void {
+    const dialogRef = this.dialog.open(ViewDepartmentComponent, {
+      width: '850px',
+      height: '380px',
+      data: department
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    //  console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
 
 
   deleteDepartment(id: Number){
     let data = {
-      module: 'sermon',
+      module: 'department',
       id
     }
     const dialogRef = this.dialog.open(DeleteItemComponent, {
@@ -85,7 +87,11 @@ public doFilter = (value: string) => {
         this._snackBar.open("Department Deleted 🙂  ", "", {
           duration: 2000,
         });
-        this.listDepartments();
+        if(result.data != null){
+          this.dataSource = new MatTableDataSource(result.data);
+          this.dataSource.paginator = this.paginator;
+          this.showTable=true;
+        }
 
       }else{
 

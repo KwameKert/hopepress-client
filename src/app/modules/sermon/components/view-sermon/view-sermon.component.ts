@@ -17,7 +17,7 @@ export class ViewSermonComponent implements OnInit {
     }
 
   ngOnInit() {
-    console.log(this.data.url)
+ //   console.log(this.data.url)
   }
 
   close(): void {

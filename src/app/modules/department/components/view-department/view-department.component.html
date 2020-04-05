@@ -1,1 +1,27 @@
-<p>view-department works!</p>
+<h1 mat-dialog-title>View Department</h1>
+<div mat-dialog-content>
+    <div  class="row">
+
+        <div class="col-md-4 text-center">
+            <img [src]="data.image_url" class="img-thumbnail " height="300" />   
+            <p class="lead">Department Image</p>  
+        </div>
+    
+    
+        <div class="col-md-8 ">
+            <p class="lead"><b>Name : </b>{{data.name}}</p>
+            <p  class="lead"><b>Description : </b> <span [innerHTML]="data.description"></span></p>
+            <p  class="lead"><b>Status  : </b>{{data.stat}}  </p>
+        </div>
+    
+    
+    </div>
+    
+</div>
+<div mat-dialog-actions class="float-right">
+    <button mat-button (click)="close()" class="float-right">Close</button>
+    
+  </div>
+       
+
+
