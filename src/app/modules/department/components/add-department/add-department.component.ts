@@ -67,6 +67,7 @@ export class AddDepartmentComponent implements OnInit {
                       .subscribe(data => {
                         this.responseData = data;
                         this.departmentForm.reset();
+                        this.previewUrl = null;
                       }, error => {
 
                       console.warn(error)
