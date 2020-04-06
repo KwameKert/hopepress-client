@@ -31,17 +31,18 @@ intercept(
             }),
             catchError((err: any) => {
                 if(err instanceof HttpErrorResponse) {
+                    console.log(err);
                     try {
                         this._toastr.error(err.error.message, "Oops 🥺", {  timeOut:2000});
 
-                        if(err.status == 403){
-                            this._router.navigate(['/login']);
-                        }
                      
                     } catch(e) {
                         this._toastr.error('An error occurred', '', {   timeOut:2000 });
                     }
-                    //log error 
+                    
+                    if(err.status == 403){
+                        this._router.navigate(['/login']);
+                    }
                 }
                 return of(err);
             }));

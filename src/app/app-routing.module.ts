@@ -28,7 +28,16 @@ const routes: Routes= [
   component: DefaultComponent,
   loadChildren: () => import('./modules/department/department.module')
                      .then(m => m.DepartmentModule)
+},
+
+{
+  path:'leaders', 
+  component: DefaultComponent,
+  loadChildren: () => import('./modules/leader/leader.module')
+                     .then(m => m.LeaderModule)
 }
+
+
 ];
 
 @NgModule({
