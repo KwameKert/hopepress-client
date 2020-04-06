@@ -23,7 +23,7 @@ intercept(
                     }
 
                     if(evt.body && evt.body.status == 417){
-                        this._toastr.info(evt.body.message, "Unexpected Error  🥺", {  timeOut:3500});
+                        this._toastr.info(evt.body.message, "Unexpected Error  🥺", {  timeOut:5000});
                     }
 
                        

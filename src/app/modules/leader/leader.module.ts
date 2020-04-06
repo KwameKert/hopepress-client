@@ -5,13 +5,14 @@ import { ListLeaderComponent } from './components/list-leader/list-leader.compon
 import { AddLeaderComponent } from './components/add-leader/add-leader.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LeaderRoutingModule } from './leader-routing.module';
+import { ViewLeaderComponent } from './components/view-leader/view-leader.component';
 
 
 
 
 
 @NgModule({
-  declarations: [UpdateLeaderComponent, ListLeaderComponent, AddLeaderComponent],
+  declarations: [UpdateLeaderComponent, ListLeaderComponent, AddLeaderComponent, ViewLeaderComponent],
   imports: [
     CommonModule,
     SharedModule,
