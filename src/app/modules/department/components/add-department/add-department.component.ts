@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddDepartmentComponent implements OnInit {
 
   ckeConfig: any;
+  status:  Boolean = false;
   mycontent: string;
   departmentForm : any;
   responseData: any;
@@ -104,6 +105,15 @@ export class AddDepartmentComponent implements OnInit {
     reader.onload = (_event) => { 
       this.previewUrl = reader.result; 
     }
+    }
+
+
+    isActive(){
+     
+      this.status = !this.status;
+      this.departmentForm.patchValue({
+        stat : this.status ? 'active' : 'inactive'
+      })
     }
 
 }

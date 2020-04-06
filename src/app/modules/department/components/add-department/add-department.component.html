@@ -27,7 +27,7 @@
                     <mat-error *ngIf="departmentForm.get('description').invalid"> Invalid input </mat-error>
 
                       <div class="form-group  " >
-                        <mat-slide-toggle formControlName="stat" style="margin: 10px 0px  0px -500px;">Active</mat-slide-toggle>
+                        <mat-slide-toggle (click)="isActive()" [checked]="status"  style="margin: 10px 0px  0px -500px;">Active</mat-slide-toggle>
                       </div>
 
                       <div class="custom-file mb-3">
