@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddSermonComponent implements OnInit {
 
+  status: Boolean = false;
   responseData: any;
   SermonForm: any;
   constructor(private _fb: FormBuilder, private _sermonService: SermonService, private _toastr: ToastrService, private _crudService: CrudService) { }
@@ -56,6 +57,13 @@ export class AddSermonComponent implements OnInit {
    }
 
 
+   isActive(){
+     
+    this.status = !this.status;
+    this.SermonForm.patchValue({
+      stat : this.status ? 'active' : 'inactive'
+    })
+  }
 
 
 }
