@@ -21,6 +21,13 @@
                         <mat-error *ngIf="leaderForm.get('name').invalid"> Invalid input </mat-error>
                       </mat-form-field>
 
+                      <mat-form-field appearance="outline" style="width:590px"  >
+                        <mat-label>Role</mat-label>
+                        <input matInput placeholder="Member"  formControlName="role" >
+                        <mat-error *ngIf="leaderForm.get('role').invalid"> Invalid input </mat-error>
+                      </mat-form-field>
+
+
                       <mat-form-field appearance="outline" style="width:590px" >
                         <mat-label>Department </mat-label>
                         <mat-select formControlName="department_id">

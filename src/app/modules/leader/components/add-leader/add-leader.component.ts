@@ -35,6 +35,7 @@ export class AddLeaderComponent implements OnInit {
   loadForm(){
     this.leaderForm = this._fb.group({
       name: new FormControl('', [Validators.required]),
+      role: new FormControl('', [Validators.required]),
       description: new FormControl('Description here',Validators.required),
       image_url: '',
       department_id: '',

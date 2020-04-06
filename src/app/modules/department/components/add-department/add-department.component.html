@@ -18,10 +18,11 @@
                     <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
                     <mat-form-field appearance="outline" style="width:590px"  >
                         <mat-label>Name</mat-label>
-                        <input matInput placeholder="Men Ministry"  formControlName="name" >
+                        <input matInput placeholder="Men Ministry"  formControlName="" >
                         <mat-error *ngIf="departmentForm.get('name').invalid"> Invalid input </mat-error>
                       </mat-form-field>
 
+                  
                       <ckeditor matInput formControlName="description" [config]="ckeConfig" debounce="500">
                     </ckeditor>
                     <mat-error *ngIf="departmentForm.get('description').invalid"> Invalid input </mat-error>
