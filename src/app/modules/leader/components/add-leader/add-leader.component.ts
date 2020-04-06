@@ -10,6 +10,8 @@ import { CrudService, ImageService } from 'src/app/shared/service/index';
 })
 export class AddLeaderComponent implements OnInit {
 
+
+  status: Boolean = false;
   ckeConfig: any;
   mycontent: string;
   leaderForm : any;
@@ -62,7 +64,7 @@ export class AddLeaderComponent implements OnInit {
   }
 
   saveLeader(){
-
+    
     console.log(this.leaderForm.value)
     
     this._crudService.addItem(this.leaderForm.value, "leader")
@@ -131,6 +133,13 @@ export class AddLeaderComponent implements OnInit {
     }
   
 
+    isActive(){
+     
+      this.status = !this.status;
+      this.leaderForm.patchValue({
+        stat : this.status ? 'active' : 'inactive'
+      })
+    }
 
 
 
