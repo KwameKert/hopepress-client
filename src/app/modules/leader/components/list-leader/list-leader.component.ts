@@ -16,7 +16,7 @@ import { ViewLeaderComponent } from '../view-leader/view-leader.component';
 })
 export class ListLeaderComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'role' ,'uploaded', 'action' ];
+  displayedColumns: string[] = ['id', 'name', 'role' , 'status','uploaded', 'action' ];
   dataSource : any;
   responseData: any;
   showTable: boolean;
