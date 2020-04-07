@@ -11,7 +11,7 @@
             <p class="lead"><b>Name : </b>{{data.name}}</p>
             <p  class="lead"><b>Role : </b>{{data.role }}</p>
             <p  class="lead"><b>Department  : </b>{{data.dep_name}}  </p>
-            <p  class="lead"><b>Description : </b>{{data.description}}</p>
+            <div class="lead row" ><div class="col-md-3"> <b>Description : </b></div> <div class="col-md-6"> <span [innerHtml]="data.description" ></span></div>   </div>
             <p  class="lead"><b>Date Uploaded : </b>{{data.createdAt | date:'mediumDate'}} </p>
         </div>
     
