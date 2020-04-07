@@ -16,7 +16,7 @@ import { ViewDepartmentComponent } from '../view-department/view-department.comp
 })
 export class ListDepartmentComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'description' ,'uploaded', 'action' ];
+  displayedColumns: string[] = ['id', 'name', 'description' ,'status','uploaded', 'action' ];
   dataSource : any;
   responseData: any;
   showTable: boolean;
