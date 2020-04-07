@@ -24,19 +24,19 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadForm();
-    this.loadConfig();
-   
-  }
-
-  loadForm(){
     this.departmentForm = this._fb.group({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('Description here',Validators.required),
       image_url: '',
       stat: ''
     })
+
+    
+    this.loadConfig();
+   
   }
+
+  
 
 
   loadConfig(){
