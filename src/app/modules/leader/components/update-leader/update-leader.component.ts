@@ -161,18 +161,16 @@ export class UpdateLeaderComponent implements OnInit {
 
 
     patchLeader(leader){
-
+     
       this.status = leader.stat == 'active' ? true : false;
       this.previewUrl = leader.image_url;
-
-
       this.leaderForm.patchValue({
         id: leader.id,
         name: leader.name,
         role:  leader.role ,
         description: leader.description,
         image_url: leader.image_url,
-        department_id: leader.department_id,
+        department_id: leader.dep_id,
         stat: leader.stat
       })
 
