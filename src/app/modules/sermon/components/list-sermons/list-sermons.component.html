@@ -56,6 +56,16 @@
                   <th mat-header-cell *matHeaderCellDef class="text-center"> Category </th>
                   <td mat-cell *matCellDef="let sermon"> {{sermon.category}} </td>
                 </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> Status </th>
+                  <td mat-cell *matCellDef="let sermon"> 
+                    <span class="badge badge-primary" [ngClass]="{
+                      'badge-success': sermon.stat == 'active',
+                      'badge-danger': sermon.stat == 'inactive'
+                    }"  >{{sermon.stat  }}</span>
+                  </td>
+                </ng-container>
             
                 <ng-container matColumnDef="uploaded">
                   <th mat-header-cell *matHeaderCellDef class="text-center"> Uploaded On </th>

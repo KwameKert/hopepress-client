@@ -17,7 +17,7 @@ import {Router} from '@angular/router';
 })
 export class ListSermonsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'title', 'speaker','category', 'uploaded', 'action'];
+  displayedColumns: string[] = ['id', 'title', 'speaker','category', 'stats','uploaded', 'action'];
   dataSource : any;
   responseData: any;
   showTable: boolean;
