@@ -30,7 +30,7 @@ export class ListDepartmentComponent implements OnInit {
    
     this.isLoading  = true;
     this.listDepartments(null);
-    this.isLoading = false;
+   
   }
 
   listDepartments(event?:PageEvent){
@@ -47,6 +47,8 @@ export class ListDepartmentComponent implements OnInit {
       this._toastr.error("Oops an error. 🥺","",{
         timeOut:2000
       })
+    }).add(()=>{
+      this.isLoading = false;
     })
 
    

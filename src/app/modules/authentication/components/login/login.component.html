@@ -1,4 +1,6 @@
-<ngx-ui-loader></ngx-ui-loader>
+
+ 
+<app-preloader *ngIf="isLoading"></app-preloader> 
 
 <div class="row login-background  justify-content-center" >
    
@@ -35,30 +37,4 @@
           </mat-card>
     </div>
 
-    
-    <!-- <div class="col-md-4 col-lg-4 mt-4  mb-4 loginForm">
-        <div class="row offset-md-1  col-md-12 col-lg-12 mt-5">
-            
-                <form >
-                    <h1 class="text-center mb-5" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">ChurchPress</h1>
-                   <div class="form-group">
-                       <div class="form-label">Email</div>
-                       <input type="text" placeholder="Enter email here" class="form-control input-lg" autocomplete="off" >
-                   </div>
-
-                   <div class="form-group">
-                    <div class="form-label">Password</div>
-                    <input type="password" placeholder="Enter password here" class="form-control input-lg"  autocomplete="off">
-                </div>
-                    <div class="">
-                        <button class="btn btn-primary" (click)="loginUser()"><span class="px-3">Login</span></button>
-                        <a href="" class="text-bold forgotten-password text-secondary">Forgotten password? </a>
-                    </div>
-                  </form>
-           
-        </div>
-      
-    </div> -->
-
-
-</div>
+</div> 

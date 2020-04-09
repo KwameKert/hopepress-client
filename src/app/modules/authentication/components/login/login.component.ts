@@ -13,6 +13,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class LoginComponent implements OnInit {
 
+  isLoading: boolean = false;
   loginForm: any;
   response: any;
   constructor(private router: Router,  private fb: FormBuilder, private _authService: AuthService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService) { }
@@ -27,15 +28,18 @@ this.clearStorage();
   }
 
   loginUser(){
-    this.ngxService.start();
+
+   this.isLoading = true;
     this._authService.getUserDetails(this.loginForm.value).subscribe(data=>{
 
       this.response = data;
+
       let user = {
         token : this.response.jwt,
         userName: this.response.user.userName,
         role: this.response.user.role
       }
+
       this._authService.setUserDetails(user);
 
       this._toastr.success("Welcome to ChurchPress 🙂","",{
@@ -44,15 +48,24 @@ this.clearStorage();
      
 
       this.router.navigate(['/dashboard']);
+      this.isLoading = false;
       
     }, error=>{
+
+      console.log(error)
+  
       this._toastr.info("Invalid credentials. 🥺","",{
         timeOut:2000
       })
-
+             
+      
+    }).add(()=>{
+      this.isLoading = false;
     })
 
-    this.ngxService.stop();
+   
+
+ 
   }
 
   clearStorage(){
