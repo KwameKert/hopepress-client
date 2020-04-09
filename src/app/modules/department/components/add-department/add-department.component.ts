@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators, FormControl} from '@angular/forms';
 import { CrudService, ImageService } from 'src/app/shared/service/index';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-add-department',
@@ -20,11 +21,14 @@ export class AddDepartmentComponent implements OnInit {
   previewUrl:any = null;
 
  
-  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService) {
+  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService) {
     this.mycontent = `<p>Description Here</p>`;
   }
 
   ngOnInit() {
+
+   // this.ngxService.start();
+
     this.departmentForm = this._fb.group({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('Description here',Validators.required),
@@ -77,16 +81,27 @@ export class AddDepartmentComponent implements OnInit {
 
 
   prepareData(){
+    this.ngxService.start();
 
-    this.uploadImage(this.formData).then((response: any) => {
-      this.departmentForm.patchValue({
-        image_url: response.data.link
-      });
+    if(this.formData != null){
 
-     this.saveDepartment();
-    }).catch((e)=>{
-      console.warn(e);
-    })
+      this.uploadImage(this.formData).then((response: any) => {
+        this.departmentForm.patchValue({
+          image_url: response.data.link
+        });
+      }).then(()=>{
+        this.saveDepartment();
+      }).catch((e)=>{
+        console.warn(e);
+      })
+    }else {
+      this.saveDepartment();
+    }
+
+
+    
+
+    
 
   }
 
@@ -102,8 +117,11 @@ export class AddDepartmentComponent implements OnInit {
       }, error => {
 
       console.warn(error)
+      }).add(()=>{
+        this.ngxService.stop();
       })
    
+
 
   }
 
