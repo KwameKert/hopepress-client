@@ -15,7 +15,7 @@
 
             </div>
             <div class="col-md-7">
-                    <form [formGroup]="departmentForm" (ngSubmit)="prepareData()">
+                    <form #myForm="ngForm" [formGroup]="departmentForm" (ngSubmit)="prepareData()">
                     <mat-form-field appearance="outline" style="width:590px"  >
                         <mat-label>Name</mat-label>
                         <input matInput placeholder="Men Ministry"  formControlName="name" >

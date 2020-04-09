@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators, FormControl} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {FormBuilder, Validators, FormControl, NgForm} from '@angular/forms';
 import { CrudService, ImageService } from 'src/app/shared/service/index';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -11,6 +11,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class AddDepartmentComponent implements OnInit {
 
+  @ViewChild('myForm') myForm: NgForm;
   ckeConfig: any;
   status:  Boolean = false;
   mycontent: string;
@@ -113,6 +114,7 @@ export class AddDepartmentComponent implements OnInit {
       .subscribe(data => {
         this.responseData = data;
         this.departmentForm.reset();
+        this.myForm.resetForm();
         this.previewUrl = null;
       }, error => {
 
