@@ -16,6 +16,7 @@ export class AddDepartmentComponent implements OnInit {
   departmentForm : any;
   responseData: any;
   fileData: File = null;
+  formData: any ;
   previewUrl:any = null;
 
  
@@ -37,6 +38,24 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   
+
+  uploadImage = (fData) =>{
+
+    console.log("Uploading image here")
+    return new Promise((resolve,reject)=>{
+      this._imageService.uploadImage(fData).subscribe( data => {
+        let response: any = data
+
+        console.log("Image response here", response)
+        resolve(response);
+       
+    
+      }, error =>{
+        reject(error)
+      })
+
+    })
+  }
 
 
   loadConfig(){
@@ -60,35 +79,57 @@ export class AddDepartmentComponent implements OnInit {
   }
 
 
+  prepareData(){
+
+   
+    this.uploadImage(this.formData).then((response: any) => {
+  
+      this.departmentForm.patchValue({
+        image_url: response.data.link
+      });
+
+     
+      this.saveDepartment();
+    }).catch((e)=>{
+      console.warn(e);
+    })
+
+  }
+
  
 
   saveDepartment(){
-    
-    this._crudService.addItem(this.departmentForm.value, "department")
-                      .subscribe(data => {
-                        this.responseData = data;
-                        this.departmentForm.reset();
-                        this.previewUrl = null;
-                      }, error => {
 
-                      console.warn(error)
-                      })
+      this._crudService.addItem(this.departmentForm.value, "department")
+      .subscribe(data => {
+        this.responseData = data;
+        this.departmentForm.reset();
+        this.previewUrl = null;
+      }, error => {
+
+      console.warn(error)
+      })
+   
+
   }
+
+
+
 
 
   fileProgress(fileInput: any) {
     this.fileData = <File>fileInput.target.files[0];
-    let formData = new FormData();
-    formData.append('image', this.fileData, this.fileData.name);
-    this._imageService.uploadImage(formData).subscribe(data =>{
-      let response: any = data
-      this.departmentForm.patchValue({
-        image_url: response.data.link
-      });
-      //this.imgURL = response.link
-    }, error=>{
-      console.warn(error)
-    })
+    this.formData = new FormData();
+    this.formData.append('image', this.fileData, this.fileData.name);
+    // this._imageService.uploadImage(formData).subscribe(data =>{
+    //   let response: any = data
+    //   this.departmentForm.patchValue({
+    //     image_url: response.data.link
+    //   });
+    //   //this.imgURL = response.link
+    // }, error=>{
+    //   console.warn(error)
+    // })
     this.preview();
   }
 
