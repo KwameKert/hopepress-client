@@ -85,12 +85,15 @@ export class UpdateDepartmentComponent implements OnInit {
 
   saveDepartment(){
 
+    this.ngxService.start()
     this._crudService.updateItem({data: this.departmentForm.value, module: "department"})
     .subscribe(data => {
       this.responseData = data;
     }, error => {
 
     console.warn(error)
+    }).add(()=>{
+      this.ngxService.stop();
     })
     
   }
