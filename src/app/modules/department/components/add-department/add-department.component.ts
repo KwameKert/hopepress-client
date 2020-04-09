@@ -13,7 +13,7 @@ export class AddDepartmentComponent implements OnInit {
 
   @ViewChild('myForm') myForm: NgForm;
   ckeConfig: any;
-  status:  Boolean = false;
+  status:  Boolean ;
   mycontent: string;
   departmentForm : any;
   responseData: any;
@@ -28,7 +28,7 @@ export class AddDepartmentComponent implements OnInit {
 
   ngOnInit() {
 
-   // this.ngxService.start();
+ 
 
     this.departmentForm = this._fb.group({
       name: new FormControl('', [Validators.required]),
@@ -82,6 +82,9 @@ export class AddDepartmentComponent implements OnInit {
 
 
   prepareData(){
+
+    
+
     this.ngxService.start();
 
     if(this.formData != null){
@@ -153,13 +156,17 @@ export class AddDepartmentComponent implements OnInit {
     }
     }
 
+   
 
     isActive(){
      
+    
       this.status = !this.status;
       this.departmentForm.patchValue({
         stat : this.status ? 'active' : 'inactive'
       })
+
+
     }
 
 
