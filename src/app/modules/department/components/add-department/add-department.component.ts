@@ -41,15 +41,12 @@ export class AddDepartmentComponent implements OnInit {
 
   uploadImage = (fData) =>{
 
-    console.log("Uploading image here")
+ 
     return new Promise((resolve,reject)=>{
       this._imageService.uploadImage(fData).subscribe( data => {
         let response: any = data
-
-        console.log("Image response here", response)
         resolve(response);
        
-    
       }, error =>{
         reject(error)
       })
@@ -81,15 +78,12 @@ export class AddDepartmentComponent implements OnInit {
 
   prepareData(){
 
-   
     this.uploadImage(this.formData).then((response: any) => {
-  
       this.departmentForm.patchValue({
         image_url: response.data.link
       });
 
-     
-      this.saveDepartment();
+     this.saveDepartment();
     }).catch((e)=>{
       console.warn(e);
     })
@@ -121,15 +115,6 @@ export class AddDepartmentComponent implements OnInit {
     this.fileData = <File>fileInput.target.files[0];
     this.formData = new FormData();
     this.formData.append('image', this.fileData, this.fileData.name);
-    // this._imageService.uploadImage(formData).subscribe(data =>{
-    //   let response: any = data
-    //   this.departmentForm.patchValue({
-    //     image_url: response.data.link
-    //   });
-    //   //this.imgURL = response.link
-    // }, error=>{
-    //   console.warn(error)
-    // })
     this.preview();
   }
 
