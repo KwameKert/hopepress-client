@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   sermonLinks: boolean = false;
+  eventsLinks: boolean = false;
   departmentLinks: boolean = false;
   leaderLinks: boolean = false;
   constructor() { }
@@ -25,6 +26,10 @@ export class SidebarComponent implements OnInit {
 
   showLeaderLinks(){
     this.leaderLinks = !this.leaderLinks;
+  }
+
+  showEventLinks(){
+    this.eventsLinks = !this.eventsLinks;
   }
 
 }
