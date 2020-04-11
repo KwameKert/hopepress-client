@@ -29,8 +29,7 @@ export class AddEventComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._toastr.success("Nice","Hello");
-
+    
     this.eventForm = this._fb.group({
       name: new FormControl('', Validators.required),
       description: new FormControl('Description here', Validators.required),
