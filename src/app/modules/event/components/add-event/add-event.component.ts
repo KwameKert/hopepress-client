@@ -63,23 +63,42 @@ export class AddEventComponent implements OnInit {
   }
 
 
-
-  saveEvent = async ()=> {
-
+  prepareEvent = async () => {
     this.ngxService.start();
-     await this.uploadImage().then(()=>{
+    if(this.formData != null){
+
+        await this.uploadImage().then(()=> {
+          this.saveEvent()
+        }).catch(e=>{
+          console.error("Image not uploaded")
+          this.saveEvent()
+        })
+
+    }else{
+      this.saveEvent()
+    }
+
+    this.ngxService.stop()
+
+
+  }
+
+
+  saveEvent(){
+
+   // this.ngxService.start();
+      this.uploadImage().then(()=>{
       this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
 
         this.myForm.resetForm();
         this.previewUrl = null;
       }, error=>{
-  
-      }).add(()=>{
-      
+
+        console.error("Opps", error)
       })
      });
 
-     this.ngxService.stop()
+    // this.ngxService.stop()
 
    
 
