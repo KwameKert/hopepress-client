@@ -33,6 +33,7 @@ export class UpdateEventComponent implements OnInit {
     this.eventId = this.route.snapshot.paramMap.get('id');
 
     this.eventForm = this._fb.group({
+      id: '',
       name: new FormControl('', Validators.required),
       description: new FormControl('Description here', Validators.required),
       startDate: new FormControl('', Validators.required),
@@ -47,8 +48,30 @@ export class UpdateEventComponent implements OnInit {
 
   loadEventData(){
 
-    this._crudService.fetchItem
+    this._crudService.fetchItem({id: this.eventId , module:"event"}).subscribe(data=>{
+        let responseData: any = data
 
+        if (responseData.data != null){
+          this.patchEvent(responseData.data);
+        }
+
+
+
+    }, error =>{
+      console.error("Oops an error occured")
+    })
+
+  }
+
+  patchEvent(event){
+
+    this.eventForm.patchValue({
+      id: event.id,
+      name: event.name,
+      description: event.description,
+      image_url: event.imageUrl,
+      stat : event.stat == 'active' ? true: false
+    })
   }
 
 

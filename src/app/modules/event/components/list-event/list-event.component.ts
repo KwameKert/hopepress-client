@@ -78,7 +78,7 @@ public doFilter = (value: string) => {
 
   deleteEvent(id: Number){
     let data = {
-      module: 'department',
+      module: 'event',
       id
     }
     const dialogRef = this.dialog.open(DeleteItemComponent, {
