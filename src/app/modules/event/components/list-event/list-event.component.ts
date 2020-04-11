@@ -64,8 +64,8 @@ public doFilter = (value: string) => {
 
   openEvent(event): void {
     const dialogRef = this.dialog.open(ViewEventComponent, {
-      width: '850px',
-      height: '380px',
+      width: '950px',
+      height: '520px',
       data: event
     });
 
