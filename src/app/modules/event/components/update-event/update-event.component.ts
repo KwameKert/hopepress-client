@@ -38,7 +38,7 @@ export class UpdateEventComponent implements OnInit {
       description: new FormControl('Description here', Validators.required),
       startDate: new FormControl('', Validators.required),
       endDate: new FormControl('' , Validators.required),
-      image_url: '',
+      imageUrl: '',
       stat : ''
     })
 
@@ -72,7 +72,7 @@ export class UpdateEventComponent implements OnInit {
       id: event.id,
       name: event.name,
       description: event.description,
-      image_url: event.imageUrl,
+      imageUrl: event.imageUrl,
       stat : event.stat == 'active' ? true: false,
       startDate: this.getLocalDate(event.startDate),
       endDate: this.getLocalDate(event.endDate),
@@ -117,7 +117,7 @@ export class UpdateEventComponent implements OnInit {
      this._imageService.uploadImage(this.formData).subscribe( data => {
        let response: any = data
        this.eventForm.patchValue({
-         image_url: response.data.link
+         imageUrl: response.data.link
        })
       
        resolve(true)
