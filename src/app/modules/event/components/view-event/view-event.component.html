@@ -1,1 +1,35 @@
-<p>view-event works!</p>
+<h1 mat-dialog-title> {{data.name}} </h1>
+<div mat-dialog-content>
+    <div  class="row">
+
+        <div class="col-md-12 text-center">
+            <img [src]="data.imageUrl" class="img-thumbnail " height="300" />   
+       
+        </div>
+    </div>
+
+    <div class="row">
+    
+        <div class="col-md-8 ">
+            <p  class="lead"><b>Description : </b> <span [innerHTML]="data.description"></span></p>
+       
+            <p  class="lead"><b>Start Date  : </b>{{data.startDate | date:'medium'}}  </p>
+            <p  class="lead"><b>End Date  : </b>{{data.endDate |  date:'medium'}}  </p>
+
+        </div>
+
+        <div class="col-md-2">
+            <p  class="lead"><b>Status  : </b>{{data.stat}}  </p>
+        </div>
+    
+    
+    </div>
+    
+</div>
+<div mat-dialog-actions class="float-right">
+    <button mat-button (click)="close()" class="float-right">Close</button>
+    
+  </div>
+       
+
+
