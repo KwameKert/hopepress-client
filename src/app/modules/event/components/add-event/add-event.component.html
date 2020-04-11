@@ -23,14 +23,20 @@
                       </mat-form-field>
                       
 
-                      <div class="form-row mb-4">
+                      <div class="form-row">
                         <div class="col">
-                          <input type="datetime-local" class="form-control"  formControlName="startDate" placeholder="First name">
-                          <mat-error *ngIf="eventForm.get('startDate').invalid"> Invalid input </mat-error>
+                            <div class="form-group">
+                                <label for="" class="float-left">Start</label>
+                                <input type="datetime-local" class="form-control"  formControlName="startDate" placeholder="First name" value="">
+                                <mat-error *ngIf="eventForm.get('startDate').invalid"> Invalid input </mat-error>
+                            </div>
                         </div>
                         <div class="col">
-                          <input type="datetime-local" class="form-control" formControlName="endDate" placeholder="Last name">
+                            <div class="form-group">
+                                <label for="" class="form-label float-left">End</label>
+                          <input type="datetime-local" class="form-control" formControlName="endDate" placeholder="Last name" value="">
                           <mat-error *ngIf="eventForm.get('endDate').invalid"> Invalid input </mat-error>
+                          </div>
                         </div>
                       </div>
                   

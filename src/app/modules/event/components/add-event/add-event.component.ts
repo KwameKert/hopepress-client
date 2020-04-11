@@ -29,12 +29,13 @@ export class AddEventComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this._toastr.success("Nice","Hello");
 
     this.eventForm = this._fb.group({
       name: new FormControl('', Validators.required),
       description: new FormControl('Description here', Validators.required),
-      startDate: new FormControl(new Date("2015-03"), Validators.required),
-      endDate: new FormControl(new Date("2015-03") , Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('' , Validators.required),
       image_url: '',
       stat : ''
     })
@@ -45,16 +46,20 @@ export class AddEventComponent implements OnInit {
 
   uploadImage =  () =>{
 
- 
+     return new Promise((resolve,reject)=>{
       this._imageService.uploadImage(this.formData).subscribe( data => {
         let response: any = data
         this.eventForm.patchValue({
           image_url: response.data.link
         })
        
+        resolve(true)
       }, error =>{
+        reject(error)
        console.error(error)
       })
+
+     }) 
 
   }
 
@@ -62,19 +67,22 @@ export class AddEventComponent implements OnInit {
 
   saveEvent = async ()=> {
 
-    console.log(this.eventForm.valule);
-    // this.ngxService.start();
-    // await this.uploadImage();
+    this.ngxService.start();
+     await this.uploadImage().then(()=>{
+      this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
 
-    // this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
+        this.myForm.resetForm();
+        this.previewUrl = null;
+      }, error=>{
+  
+      }).add(()=>{
+      
+      })
+     });
 
-    //   this.myForm.resetForm();
-    //   this.previewUrl = null;
-    // }, error=>{
+     this.ngxService.stop()
 
-    // }).add(()=>{
-    //   this.ngxService.stop()
-    // })
+   
 
   }
 
