@@ -61,8 +61,8 @@ public doFilter = (value: string) => {
 
   openDepartment(department): void {
     const dialogRef = this.dialog.open(ViewDepartmentComponent, {
-      width: '850px',
-      height: '380px',
+      width: '950px',
+      height: '520px',
       data: department
     });
 
