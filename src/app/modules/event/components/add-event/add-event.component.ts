@@ -18,7 +18,7 @@ export class AddEventComponent implements OnInit {
   eventForm : any;
   responseData: any;
   fileData: File = null;
-  formData: any ;
+  formData: any  = null;
   previewUrl:any = null;
 
 
@@ -64,8 +64,12 @@ export class AddEventComponent implements OnInit {
 
 
   prepareEvent = async () => {
+
+   // console.log("Im here", this.formData)
     this.ngxService.start();
-    if(this.formData != null){
+    if(this.formData){
+
+      console.log("Im here")
 
         await this.uploadImage().then(()=> {
           this.saveEvent()
@@ -87,16 +91,17 @@ export class AddEventComponent implements OnInit {
   saveEvent(){
 
    // this.ngxService.start();
-      this.uploadImage().then(()=>{
+   
       this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
 
         this.myForm.resetForm();
         this.previewUrl = null;
+        
       }, error=>{
 
         console.error("Opps", error)
       })
-     });
+
 
     // this.ngxService.stop()
 
