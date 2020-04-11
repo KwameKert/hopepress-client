@@ -19,7 +19,7 @@ import { ViewEventComponent } from '../view-event/view-event.component';
 export class ListEventComponent implements OnInit {
 
   
-  displayedColumns: string[] = ['id', 'name', 'description' ,'start','end', 'action' ];
+  displayedColumns: string[] = ['id', 'name', 'description' ,'start','status','end', 'action' ];
   dataSource : any;
   responseData: any;
   showTable: boolean;
