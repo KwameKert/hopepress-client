@@ -33,8 +33,8 @@ export class AddEventComponent implements OnInit {
     this.eventForm = this._fb.group({
       name: new FormControl('', Validators.required),
       description: new FormControl('Description here', Validators.required),
-      startDate: new FormControl('', Validators.required),
-      endDate: new FormControl('', Validators.required),
+      startDate: new FormControl(new Date("2015-03"), Validators.required),
+      endDate: new FormControl(new Date("2015-03") , Validators.required),
       image_url: '',
       stat : ''
     })
@@ -62,18 +62,19 @@ export class AddEventComponent implements OnInit {
 
   saveEvent = async ()=> {
 
-    this.ngxService.start();
-    await this.uploadImage();
+    console.log(this.eventForm.valule);
+    // this.ngxService.start();
+    // await this.uploadImage();
 
-    this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
+    // this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
 
-      this.myForm.resetForm();
-      this.previewUrl = null;
-    }, error=>{
+    //   this.myForm.resetForm();
+    //   this.previewUrl = null;
+    // }, error=>{
 
-    }).add(()=>{
-      this.ngxService.stop()
-    })
+    // }).add(()=>{
+    //   this.ngxService.stop()
+    // })
 
   }
 

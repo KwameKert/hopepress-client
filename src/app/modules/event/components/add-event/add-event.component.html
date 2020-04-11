@@ -15,7 +15,7 @@
 
             </div>
             <div class="col-md-7">
-                    <form #myForm="ngForm" [formGroup]="eventForm" (ngSubmit)="prepareData()">
+                    <form #myForm="ngForm" [formGroup]="eventForm" (ngSubmit)="saveEvent()">
                     <mat-form-field appearance="outline" style="width:590px"  >
                         <mat-label>Name</mat-label>
                         <input matInput placeholder="Men Ministry"  formControlName="name" >
@@ -23,6 +23,16 @@
                       </mat-form-field>
                       
 
+                      <div class="form-row mb-4">
+                        <div class="col">
+                          <input type="datetime-local" class="form-control"  formControlName="startDate" placeholder="First name">
+                          <mat-error *ngIf="eventForm.get('startDate').invalid"> Invalid input </mat-error>
+                        </div>
+                        <div class="col">
+                          <input type="datetime-local" class="form-control" formControlName="endDate" placeholder="Last name">
+                          <mat-error *ngIf="eventForm.get('endDate').invalid"> Invalid input </mat-error>
+                        </div>
+                      </div>
                   
                       <ckeditor matInput formControlName="description" [config]="ckeConfig" debounce="500">
                     </ckeditor>
