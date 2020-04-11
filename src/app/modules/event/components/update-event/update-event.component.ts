@@ -21,7 +21,7 @@ export class UpdateEventComponent implements OnInit {
   formData: any ;
   previewUrl:any = null;
   eventId: any ;
-
+  offset = new Date().getTimezoneOffset() * 1000 * 60
 
  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService, private route: ActivatedRoute) {
     this.mycontent = `<p>Description Here</p>`;
@@ -41,6 +41,9 @@ export class UpdateEventComponent implements OnInit {
       image_url: '',
       stat : ''
     })
+
+
+    this.loadEventData();
   
   }
 
@@ -70,11 +73,22 @@ export class UpdateEventComponent implements OnInit {
       name: event.name,
       description: event.description,
       image_url: event.imageUrl,
-      stat : event.stat == 'active' ? true: false
+      stat : event.stat == 'active' ? true: false,
+      startDate: this.getLocalDate(event.startDate),
+      endDate: this.getLocalDate(event.endDate),
     })
+
+    this.previewUrl = event.imageUrl
   }
 
 
+
+
+ getLocalDate = value => {
+    const offsetDate = new Date(value).valueOf() - this.offset
+    const date = new Date(offsetDate).toISOString()
+    return date.substring(0, 16)
+}
 
   loadConfig(){
     this.ckeConfig = {
@@ -122,20 +136,20 @@ export class UpdateEventComponent implements OnInit {
 
    this.ngxService.start();
     await this.uploadImage().then(()=>{
-     this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
-
-     }, error=>{
- 
-     }).add(()=>{
-     
-     })
+      this.persistData()
     });
 
     this.ngxService.stop()
 
-  
+  }
 
- }
+  persistData(){
+    this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
+      console.log("done")
+    }, error=>{
+      console.error(error)
+    })
+  }
 
 
 
