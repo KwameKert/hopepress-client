@@ -19,7 +19,7 @@ intercept(
                 if (evt instanceof HttpResponse) {
                  
                     if(evt.body && evt.body.status == 200){
-                        this._toastr.success(evt.body.message, "Success  🙂", {  timeOut:2000});
+                        this._toastr.success(evt.body.message, "Success  😊", {  timeOut:2000});
                     }
 
                     if(evt.body && evt.body.status == 417){
@@ -33,11 +33,11 @@ intercept(
                 if(err instanceof HttpErrorResponse) {
                     console.log(err);
                     try {
-                        this._toastr.error(err.error.message, "Oops 🥺", {  timeOut:2000});
+                        this._toastr.error(err.error.message, "Oops 🥺", {  timeOut:4000});
 
                      
                     } catch(e) {
-                        this._toastr.error('An error occurred', '', {   timeOut:2000 });
+                        this._toastr.error('An error occurred', '', {   timeOut:4000 });
                     }
                     
                     if(err.status == 403){

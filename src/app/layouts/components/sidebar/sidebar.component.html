@@ -33,6 +33,32 @@
                 <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/sermons/list"> <mat-icon>add</mat-icon>  List Sermons</a></li>
               </div>
 
+
+
+
+        <a  mat-list-item  routerLinkActive="list-item-active" (click)="showEventLinks()" data-toggle="collapse" href="#eventLinks"> 
+            
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <mat-icon > event</mat-icon>
+                </div>
+                <div class="col-md-8 ">
+                    Event &nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="col-md-2 float-right ">
+                    <mat-icon class="li-icon" [style.display]="eventLinks ? 'none':'block'"  >keyboard_arrow_right</mat-icon>  <mat-icon class="li-icon" [style.display]="eventLinks ? 'block':'none'" >keyboard_arrow_down</mat-icon>
+                </div>
+            </div>
+            
+           </a>
+            <div class="collapse sub-menu"  id="eventLinks"  >
+                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/events/add"> <mat-icon>add</mat-icon>  Add Event</a></li>
+                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/events/list"> <mat-icon>add</mat-icon>  List Events</a></li>
+              </div>
+
+
+              
+
         <a  mat-list-item  routerLinkActive="list-item-active" (click)="showDepartmentLinks()" data-toggle="collapse" href="#departmentLinks"> 
             
             <div class="row mt-2">
@@ -49,7 +75,7 @@
             
            </a>
             <div class="collapse sub-menu"  id="departmentLinks"  >
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/departments/add"> <mat-icon>add</mat-icon>  Add Deparment</a></li>
+                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/departments/add"> <mat-icon>add</mat-icon>  Add Event</a></li>
                 <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/departments/list"> <mat-icon>add</mat-icon>  List Departments</a></li>
               </div>
 

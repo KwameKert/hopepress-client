@@ -35,6 +35,12 @@ const routes: Routes= [
   component: DefaultComponent,
   loadChildren: () => import('./modules/leader/leader.module')
                      .then(m => m.LeaderModule)
+},
+{
+  path:'events', 
+  component: DefaultComponent,
+  loadChildren: () => import('./modules/event/event.module')
+                     .then(m => m.EventsModule)
 }
 
 

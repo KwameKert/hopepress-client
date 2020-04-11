@@ -7,16 +7,19 @@ import { ToastrService } from 'ngx-toastr';
 import { CrudService } from 'src/app/shared/service/crud.service';
 import { Router } from '@angular/router';
 import { DeleteItemComponent } from 'src/app/modules/shared/delete-item/delete-item.component';
-import { ViewDepartmentComponent } from '../view-department/view-department.component';
+import { ViewEventComponent } from '../view-event/view-event.component';
+
+
 
 @Component({
-  selector: 'app-list-department',
-  templateUrl: './list-department.component.html',
-  styleUrls: ['./list-department.component.scss']
+  selector: 'app-list-event',
+  templateUrl: './list-event.component.html',
+  styleUrls: ['./list-event.component.scss']
 })
-export class ListDepartmentComponent implements OnInit {
+export class ListEventComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'description' ,'status','uploaded', 'action' ];
+  
+  displayedColumns: string[] = ['id', 'name', 'description' ,'start','status','end', 'action' ];
   dataSource : any;
   responseData: any;
   showTable: boolean;
@@ -29,12 +32,12 @@ export class ListDepartmentComponent implements OnInit {
   ngOnInit() {
    
     this.isLoading  = true;
-    this.listDepartments(null);
+    this.listEvents(null);
    
   }
 
-  listDepartments(event?:PageEvent){
-    this._crudService.fetchAll("department").subscribe(data=>{
+  listEvents(event?:PageEvent){
+    this._crudService.fetchAll("event").subscribe(data=>{
       this.responseData = data;
       if(this.responseData.data != null){
         this.responseData = data;
@@ -59,11 +62,11 @@ public doFilter = (value: string) => {
   }
 
 
-  openDepartment(department): void {
-    const dialogRef = this.dialog.open(ViewDepartmentComponent, {
+  openEvent(event): void {
+    const dialogRef = this.dialog.open(ViewEventComponent, {
       width: '950px',
       height: '520px',
-      data: department
+      data: event
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -73,9 +76,9 @@ public doFilter = (value: string) => {
   }
 
 
-  deleteDepartment(id: Number){
+  deleteEvent(id: Number){
     let data = {
-      module: 'department',
+      module: 'event',
       id
     }
     const dialogRef = this.dialog.open(DeleteItemComponent, {
@@ -86,7 +89,7 @@ public doFilter = (value: string) => {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
-        this._snackBar.open("Department Deleted 🙂  ", "", {
+        this._snackBar.open("Event Deleted 🙂  ", "", {
           duration: 2000,
         });
         if(result.data != null){
@@ -105,8 +108,8 @@ public doFilter = (value: string) => {
   }
 
 
-  updateDepartment(id: any){
-    this._router.navigate([`departments/update/${id}`]);
+  updateEvent(id: any){
+    this._router.navigate([`events/update/${id}`]);
   }
 
 }

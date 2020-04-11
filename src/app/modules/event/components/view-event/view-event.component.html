@@ -1,26 +1,30 @@
-<h1 mat-dialog-title>{{data.name}}</h1>
+<h1 mat-dialog-title> {{data.name}} </h1>
 <div mat-dialog-content>
     <div  class="row">
 
         <div class="col-md-12 text-center">
-            <img [src]="data.image_url" class="img-thumbnail " height="300" />   
-         
+            <img [src]="data.imageUrl" class="img-thumbnail " height="300" />   
+       
         </div>
-    
     </div>
-    <div class="row mt-3">
-        <div class="col-md-11 ">
-            <p ><b>Name : </b>{{data.name}}</p>
-            <p  ><b>Description : </b> <span [innerHTML]="data.description"></span></p>
-            <p  ><b>Status  : </b>{{data.stat}}  </p>
-        </div>
+
+    <div class="row">
     
+        <div class="col-md-11 ">
+            <p  class=""><b>Description : </b> <span [innerHTML]="data.description"></span></p>
+       
+            <p  class=""><b>Start Date  : </b>{{data.startDate | date:'medium'}}  </p>
+            <p  class=""><b>End Date  : </b>{{data.endDate |  date:'medium'}}  </p>
+
+        </div>
+
         <div class="col-md-1">
             <span class="badge badge-primary" [ngClass]="{
                 'badge-success': data.stat == 'active',
                 'badge-danger': data.stat == 'inactive'
               }"  >{{data.stat  }}</span>
         </div>
+    
     
     </div>
     

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators, FormControl} from '@angular/forms';
 import { CrudService, ImageService } from 'src/app/shared/service/index';
+import { async } from '@angular/core/testing';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 
 @Component({
@@ -18,10 +20,11 @@ export class AddLeaderComponent implements OnInit {
   responseData: any;
   fileData: File = null;
   previewUrl:any = null;
+  formData = new FormData();
 
   departments: any = null;
 
-  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService) {
+  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService,  private ngxService: NgxUiLoaderService) {
     this.mycontent = `<p>Description Here</p>`;
   }
 
@@ -64,9 +67,11 @@ export class AddLeaderComponent implements OnInit {
     };
   }
 
-  saveLeader(){
+  saveLeader = async () =>{
     
-    console.log(this.leaderForm.value)
+    this.ngxService.start();
+    
+    await this.uploadImage()
     
     this._crudService.addItem(this.leaderForm.value, "leader")
                       .subscribe(data => {
@@ -76,17 +81,15 @@ export class AddLeaderComponent implements OnInit {
                       }, error => {
 
                       console.warn(error)
+                      }).add(() => {
+                        this.ngxService.stop()
                       })
   }
 
 
+  uploadImage(){
 
-
-  fileProgress(fileInput: any) {
-    this.fileData = <File>fileInput.target.files[0];
-    let formData = new FormData();
-    formData.append('image', this.fileData, this.fileData.name);
-    this._imageService.uploadImage(formData).subscribe(data =>{
+     this._imageService.uploadImage(this.formData).subscribe(data =>{
       let response: any = data
       this.leaderForm.patchValue({
         image_url: response.data.link
@@ -95,6 +98,15 @@ export class AddLeaderComponent implements OnInit {
     }, error=>{
       console.warn(error)
     })
+
+  }
+
+
+
+
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    this.formData.append('image', this.fileData, this.fileData.name);
     this.preview();
   }
 

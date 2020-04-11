@@ -103,6 +103,7 @@ export class UpdateDepartmentComponent implements OnInit {
     this.departmentForm.patchValue({
       id: department.id,
       name: department.name,
+      image_url: department.imageUrl,
       description: department.description,
       stat : department.stat == 'active' ? true: false
     })
