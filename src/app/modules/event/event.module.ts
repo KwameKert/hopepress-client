@@ -4,13 +4,17 @@ import { UpdateEventComponent } from './components/update-event/update-event.com
 import { ViewEventComponent } from './components/view-event/view-event.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { ListEventsComponent } from './components/list-events/list-events.component';
+import { EventRoutingModule } from './event-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
 @NgModule({
   declarations: [UpdateEventComponent, ViewEventComponent, AddEventComponent, ListEventsComponent],
   imports: [
-    CommonModule
+    CommonModule, 
+    EventRoutingModule,
+    SharedModule
   ]
 })
 export class EventsModule { }
