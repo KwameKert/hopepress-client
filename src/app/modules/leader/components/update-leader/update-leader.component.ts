@@ -171,7 +171,7 @@ export class UpdateLeaderComponent implements OnInit {
           this.responseData = data;
         
           //console.log(this.responseData.data)
-          this.departments = this.responseData.data.filter((department)=> department.stat == "true");
+          this.departments = this.responseData.data.filter((department)=> department.stat == "active");
           //console.log(this.departments)
         }
         
