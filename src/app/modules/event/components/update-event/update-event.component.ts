@@ -152,7 +152,7 @@ export class UpdateEventComponent implements OnInit {
   }
 
   persistData(){
-    this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
+    this._crudService.updateItem({data: this.eventForm.value,module:"event"}).subscribe(data=>{
       console.log("done")
     }, error=>{
       console.error(error)
