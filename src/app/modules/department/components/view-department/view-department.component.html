@@ -1,34 +1,146 @@
-<h1 mat-dialog-title>{{data.name}}</h1>
-<div mat-dialog-content>
-    <div  class="row">
 
-        <div class="col-md-12 text-center">
-            <img [src]="data.image_url" class="img-thumbnail " height="300" />   
-         
+<mat-card class="mat-elevation-z3" style="margin-bottom:300px;">
+
+    <mat-card-header>
+        <mat-card-title  *ngIf="responseData">{{responseData.name}}</mat-card-title>
+      </mat-card-header>
+
+
+    <mat-card-content>
+
+        
+<div *ngIf="!isLoaded; else elseBlock">
+   
+        <div class="row"  >
+            
+            
+            <div class="col-md-3 text-center">
+                <ngx-skeleton-loader appearance="circle" [theme]="{ width: '120px', height: '120px' }">
+                </ngx-skeleton-loader><br>
+                <ngx-skeleton-loader [theme]="{ width: '120px', 'border-radius': '0', height: '15px' }"></ngx-skeleton-loader>
+            
+            
+            </div>
+    
+            <div class="col-md-9 mt-3">
+                <ngx-skeleton-loader [theme]="{
+                    width: '90%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{
+                    width: '70%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+    
+                  <ngx-skeleton-loader [theme]="{
+                    width: '90%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{
+                    width: '60%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+    
+                  <ngx-skeleton-loader [theme]="{
+                    width: '90%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+    
+            </div>
+        
         </div>
     
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-11 ">
-            <p ><b>Name : </b>{{data.name}}</p>
-            <p  ><b>Description : </b> <span [innerHTML]="data.description"></span></p>
-            <p  ><b>Status  : </b>{{data.stat}}  </p>
-        </div>
-    
-        <div class="col-md-1">
-            <span class="badge badge-primary" [ngClass]="{
-                'badge-success': data.stat == 'active',
-                'badge-danger': data.stat == 'inactive'
-              }"  >{{data.stat  }}</span>
-        </div>
-    
-    </div>
-    
+
+
 </div>
-<div mat-dialog-actions class="float-right">
-    <button mat-button (click)="close()" class="float-right">Close</button>
-    
-  </div>
+
+
+
+<ng-template #elseBlock>
+
+    <div class="row" >
+        <div class="col-md-5">
+            
+            <img [src]="responseData.image_url" class="img-thumbnail " height="300" />   
+        
+        </div>
+
+        <div class="col-md-7 text-align-left">
+        <p><b>Description : </b> <span [innerHtml]="responseData.description" ></span>  </p>
+        <p><b>Status:</b> <br>
+            <span class="badge badge-primary" [ngClass]="{
+                'badge-success': responseData.stat == 'active',
+                'badge-danger': responseData.stat == 'inactive'
+              }"  >{{responseData.stat  }}</span>
+        </p>
+        <p  ><b>Date Uploaded : </b>{{responseData.createdAt | date:'mediumDate'}} </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        
+        <table mat-table [dataSource]="dataSource" *ngIf="dataSource" >
+             
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> Id. </th>
+              <td mat-cell *matCellDef="let leader"> {{leader.id}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> Title </th>
+              <td mat-cell *matCellDef="let leader"> {{leader.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> Role </th>
+              <td mat-cell *matCellDef="let leader"> {{leader.role }} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> Status </th>
+              <td mat-cell *matCellDef="let leader"> 
+                <span class="badge badge-primary" [ngClass]="{
+                  'badge-success': leader.stat == 'active',
+                  'badge-danger': leader.stat == 'inactive'
+                }"  >{{leader.stat  }}</span>
+              </td>
+            </ng-container>
+        
+       
+        
+            <ng-container matColumnDef="uploaded">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> Uploaded  On </th>
+              <td mat-cell *matCellDef="let leader"> {{leader.createdAt | date:'mediumDate' }} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> Action </th>
+              <td mat-cell *matCellDef="let leader"> 
+                  <button mat-icon-button color="primary"  (click)="openLeader(leader)"  aria-label="Example icon-button with a heart icon"> <mat-icon> visibility</mat-icon>  </button >
+             
+            
+            </td>
+            </ng-container>
+          
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        
+    </div>
+</ng-template>
+
        
 
-
+    </mat-card-content>
+</mat-card>

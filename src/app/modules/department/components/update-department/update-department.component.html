@@ -2,9 +2,18 @@
 <mat-card class="mat-elevation-z3" style="margin-bottom:300px; text-align: center">
     <mat-card-content>
         <div class="row justify-content-center">
-            <div class="col-md-5 pl-3">
-               <img src="assets/images/dep2.jpg" alt="" class="img-fluid">
-            </div>
+          <div class="col-md-5 pl-3">
+
+            <div *ngIf="previewUrl; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock> 
+                 <img [src]="previewUrl" class="img-thumbnail " height="300" />   
+                <p class="lead">Department Image</p>         
+            </ng-template>
+            <ng-template #elseBlock>
+                <img src="assets/images/dep2.jpg" class="img-thumbnail mt-4" height="300" />  
+            </ng-template>
+
+          </div>
             <div class="col-md-7">
                     <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
                     <mat-form-field appearance="outline" style="width:590px"  >
@@ -17,9 +26,16 @@
                     </ckeditor>
                     <mat-error *ngIf="departmentForm.get('description').invalid"> Invalid input </mat-error>
 
+                  
                       <div class="form-group  " >
                         <mat-slide-toggle (change)="isActive()" [checked]="status"    style="margin: 10px 0px  0px -500px;">Active</mat-slide-toggle>
                       </div>
+
+                      <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="customFile" name="filename" (change)="fileProgress($event)" #imageHolder >
+                        <label class="custom-file-label" for="customFile">Department Image</label>
+                      </div>
+  
 
                       <div class="float-right">
                         <button  mat-stroked-button color="primary" class="mr-1" type="submit" >Update Department</button>

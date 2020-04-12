@@ -4,6 +4,7 @@ import { CrudService } from 'src/app/shared/service/crud.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ImageService } from 'src/app/shared/service';
 
 @Component({
   selector: 'app-update-department',
@@ -18,9 +19,14 @@ export class UpdateDepartmentComponent implements OnInit {
   mycontent: string;
   departmentForm : any;
   responseData: any;
+  fileData: File = null;
+  formData: any ;
+  previewUrl:any = null;
 
 
-  constructor(private route: ActivatedRoute,private _fb: FormBuilder, private _toastr: ToastrService, private _crudService: CrudService, private ngxService: NgxUiLoaderService) { }
+
+
+  constructor(private route: ActivatedRoute,private _fb: FormBuilder, private _toastr: ToastrService, private _crudService: CrudService, private ngxService: NgxUiLoaderService, private _imageService: ImageService) { }
 
    ngOnInit() {
     this.departmentId = this.route.snapshot.paramMap.get('id');
@@ -57,6 +63,7 @@ export class UpdateDepartmentComponent implements OnInit {
       id:'',
       name: new FormControl('', [Validators.required]),
       description: new FormControl('Description here',Validators.required),
+      image_url: '',
       stat: ''
     })
   }
@@ -83,33 +90,90 @@ export class UpdateDepartmentComponent implements OnInit {
   }
 
 
-  saveDepartment(){
+
+  uploadImage = () =>{
+
+ 
+    return new Promise((resolve,reject)=>{
+      this._imageService.uploadImage(this.formData).subscribe( data => {
+        let response: any = data
+        this.departmentForm.patchValue({
+          image_url: response.data.link
+        })
+        resolve(response);
+       
+      }, error =>{
+        reject(error)
+      })
+
+    })
+  }
+
+
+  saveDepartment = async () => {
 
     this.ngxService.start()
-    this._crudService.updateItem({data: this.departmentForm.value, module: "department"})
-    .subscribe(data => {
-      this.responseData = data;
-    }, error => {
-
-    console.warn(error)
-    }).add(()=>{
-      this.ngxService.stop();
-    })
+    if(this.formData){
+      await this.uploadImage().then(()=>{
+         this.persistData();
+      })
+    }else{
+       this.persistData();
+    }
+    this.ngxService.stop();
     
   }
 
 
-  patchDepartmentForm(department){
-    this.departmentForm.patchValue({
-      id: department.id,
-      name: department.name,
-      image_url: department.imageUrl,
-      description: department.description,
-      stat : department.stat == 'active' ? true: false
+  persistData(){
+    this._crudService.updateItem({data: this.departmentForm.value, module: "department"})
+    .subscribe(data => {
+      this.responseData = data;
+    }, error => {
+    console.warn(error)
     })
   }
 
 
+  patchDepartmentForm(department){
+
+    this.previewUrl = department.image_url;
+
+    this.departmentForm.patchValue({
+      id: department.id,
+      name: department.name,
+      image_url: department.image_url,
+      description: department.description,
+      stat : department.stat 
+    })
+
+    this.status = department.stat == 'active' ? true: false;
+  }
+
+
+
+
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    this.formData = new FormData();
+    this.formData.append('image', this.fileData, this.fileData.name);
+    this.preview();
+  }
+
+
+  preview() {
+    // Show preview 
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.fileData); 
+    reader.onload = (_event) => { 
+      this.previewUrl = reader.result; 
+    }
+    }
 
 
   isActive(){

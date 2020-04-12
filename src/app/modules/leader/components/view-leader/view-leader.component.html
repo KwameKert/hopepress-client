@@ -1,18 +1,24 @@
-<h1 mat-dialog-title>View Sermon</h1>
+<h1 mat-dialog-title>{{data.name}}</h1>
 <div mat-dialog-content>
     <div  class="row">
 
-        <div class="col-md-5">
-         <img src="" alt="">
+        <div class="col-md-6">
+            <img [src]="data.image_url" class="img-thumbnail " height="300" />   
         </div>
     
     
         <div class="col-md-6 ">
-            <p class="lead"><b>Name : </b>{{data.name}}</p>
-            <p  class="lead"><b>Role : </b>{{data.role }}</p>
-            <p  class="lead"><b>Department  : </b>{{data.dep_name}}  </p>
-            <div class="lead row" ><div class="col-md-3"> <b>Description : </b></div> <div class="col-md-6"> <span [innerHtml]="data.description" ></span></div>   </div>
-            <p  class="lead"><b>Date Uploaded : </b>{{data.createdAt | date:'mediumDate'}} </p>
+            <p  ><b>Role : </b> <br>{{data.role }}</p>
+            <p  ><b>Department  : </b> <br>{{data.dep_name}}  </p>
+            <p><b>Description : </b> <span [innerHtml]="data.description" ></span>  </p>
+            <p><b>Status:</b> <br>
+                <span class="badge badge-primary" [ngClass]="{
+                    'badge-success': data.stat == 'active',
+                    'badge-danger': data.stat == 'inactive'
+                  }"  >{{data.stat  }}</span>
+            </p>
+            <p  ><b>Date Uploaded : </b>{{data.createdAt | date:'mediumDate'}} </p>
+
         </div>
     
     
