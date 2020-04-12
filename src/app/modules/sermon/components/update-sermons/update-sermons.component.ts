@@ -91,7 +91,7 @@ export class UpdateSermonsComponent implements OnInit {
 
   updateSermon(){
 
-    this.ngxService.startLoader('loader-02');
+    this.ngxService.start()
     this._crudService.updateItem({data: this.SermonForm.value, module:"sermon"})
     .subscribe(data=>{
      
@@ -99,7 +99,7 @@ export class UpdateSermonsComponent implements OnInit {
    
     })
 
-    this.ngxService.stopLoader('loader-02');
+    this.ngxService.stop();
   }
 
 

@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {SermonService} from '../../service/sermon.service';
 import {CrudService} from '../../../../shared/service/crud.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 
 
@@ -17,7 +17,7 @@ export class AddSermonComponent implements OnInit {
   status: Boolean = false;
   responseData: any;
   SermonForm: any;
-  constructor(private _fb: FormBuilder, private _sermonService: SermonService, private _toastr: ToastrService, private _crudService: CrudService) { }
+  constructor(private _fb: FormBuilder, private _sermonService: SermonService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService, private _crudService: CrudService) { }
 
   ngOnInit() {
    this.loadSermon();
@@ -38,21 +38,17 @@ export class AddSermonComponent implements OnInit {
 
   saveSermon(){
 
-  
+  this.ngxService.start()
     this._crudService.addItem(this.SermonForm.value,"sermon").subscribe(data=>{
         this.responseData = data;
-        // this._toastr.success("Sermon saved 🙂","",{
-        //   timeOut:2000
-        // })
-
         this.SermonForm.reset();
   
     }, error=>{
-      // this._toastr.info("Oops an error. 🥺","",{
-      //   timeOut:2000
-      // })
+     
     })
 
+
+    this.ngxService.stop();
 
    }
 
