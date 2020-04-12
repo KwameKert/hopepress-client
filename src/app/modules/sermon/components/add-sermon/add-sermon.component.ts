@@ -41,16 +41,16 @@ export class AddSermonComponent implements OnInit {
   
     this._crudService.addItem(this.SermonForm.value,"sermon").subscribe(data=>{
         this.responseData = data;
-        this._toastr.success("Sermon saved 🙂","",{
-          timeOut:2000
-        })
+        // this._toastr.success("Sermon saved 🙂","",{
+        //   timeOut:2000
+        // })
 
         this.SermonForm.reset();
   
     }, error=>{
-      this._toastr.info("Oops an error. 🥺","",{
-        timeOut:2000
-      })
+      // this._toastr.info("Oops an error. 🥺","",{
+      //   timeOut:2000
+      // })
     })
 
 

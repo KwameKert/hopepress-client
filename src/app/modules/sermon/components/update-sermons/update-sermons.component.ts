@@ -14,6 +14,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class UpdateSermonsComponent implements OnInit {
 
+  status: Boolean ;
   sermonUrl : any ;
   responseData: any;
   sermonId: any;
@@ -63,8 +64,22 @@ export class UpdateSermonsComponent implements OnInit {
       speaker: sermon.speaker,
       url: sermon.url,
       category: sermon.category,
-      stat : sermon.stat == 'true'? true : false
+      stat : sermon.stat 
     })
+
+
+    sermon.stat == 'true' ? this.status = true: this.status = false;
+      
+  }
+
+  isActive(){
+     
+    this.status = !this.status;
+    this.SermonForm.patchValue({
+      stat : this.status ? 'active' : 'inactive'
+    })
+
+
 
   }
 
@@ -79,13 +94,9 @@ export class UpdateSermonsComponent implements OnInit {
     this.ngxService.startLoader('loader-02');
     this._crudService.updateItem({data: this.SermonForm.value, module:"sermon"})
     .subscribe(data=>{
-      this._toastr.success("Sermon updated 🙂","",{
-        timeOut:2000
-      })
+     
     }, error=>{
-      this._toastr.info("Oops an error. 🥺","",{
-        timeOut:2000
-      })
+   
     })
 
     this.ngxService.stopLoader('loader-02');

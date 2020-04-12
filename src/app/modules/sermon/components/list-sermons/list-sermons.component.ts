@@ -17,7 +17,7 @@ import {Router} from '@angular/router';
 })
 export class ListSermonsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'title', 'speaker','category', 'stats','uploaded', 'action'];
+  displayedColumns: string[] = ['id', 'title', 'speaker','category', 'status','uploaded', 'action'];
   dataSource : any;
   responseData: any;
   showTable: boolean;
@@ -39,6 +39,7 @@ export class ListSermonsComponent implements OnInit {
       if(this.responseData.data != null){
         this.responseData = data;
         this.dataSource = new MatTableDataSource(this.responseData.data);
+        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.showTable=true;
       }
