@@ -63,6 +63,7 @@ export class UpdateDepartmentComponent implements OnInit {
       id:'',
       name: new FormControl('', [Validators.required]),
       description: new FormControl('Description here',Validators.required),
+      image_url: '',
       stat: ''
     })
   }
@@ -96,6 +97,9 @@ export class UpdateDepartmentComponent implements OnInit {
     return new Promise((resolve,reject)=>{
       this._imageService.uploadImage(this.formData).subscribe( data => {
         let response: any = data
+        this.departmentForm.patchValue({
+          image_url: response.data.link
+        })
         resolve(response);
        
       }, error =>{
@@ -132,10 +136,13 @@ export class UpdateDepartmentComponent implements OnInit {
 
 
   patchDepartmentForm(department){
+
+    this.previewUrl = department.image_url;
+
     this.departmentForm.patchValue({
       id: department.id,
       name: department.name,
-      image_url: department.imageUrl,
+      image_url: department.image_url,
       description: department.description,
       stat : department.stat 
     })
@@ -144,6 +151,29 @@ export class UpdateDepartmentComponent implements OnInit {
   }
 
 
+
+
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    this.formData = new FormData();
+    this.formData.append('image', this.fileData, this.fileData.name);
+    this.preview();
+  }
+
+
+  preview() {
+    // Show preview 
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.fileData); 
+    reader.onload = (_event) => { 
+      this.previewUrl = reader.result; 
+    }
+    }
 
 
   isActive(){
