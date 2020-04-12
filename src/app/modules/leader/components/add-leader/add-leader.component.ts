@@ -13,7 +13,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 export class AddLeaderComponent implements OnInit {
 
 
-  status: Boolean = false;
+  status: Boolean ;
   ckeConfig: any;
   mycontent: string;
   leaderForm : any;
