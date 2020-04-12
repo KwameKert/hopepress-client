@@ -105,8 +105,4 @@ public doFilter = (value: string) => {
   }
 
 
-  updateDepartment(id: any){
-    this._router.navigate([`departments/update/${id}`]);
-  }
-
 }

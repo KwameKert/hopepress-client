@@ -190,7 +190,6 @@ export class UpdateLeaderComponent implements OnInit {
         stat : this.status ? 'active' : 'inactive'
       })
 
-      console.log(this.leaderForm.value,this.status)
 
 
     }
