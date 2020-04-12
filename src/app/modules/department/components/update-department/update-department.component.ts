@@ -4,6 +4,7 @@ import { CrudService } from 'src/app/shared/service/crud.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ImageService } from 'src/app/shared/service';
 
 @Component({
   selector: 'app-update-department',
@@ -18,9 +19,14 @@ export class UpdateDepartmentComponent implements OnInit {
   mycontent: string;
   departmentForm : any;
   responseData: any;
+  fileData: File = null;
+  formData: any ;
+  previewUrl:any = null;
 
 
-  constructor(private route: ActivatedRoute,private _fb: FormBuilder, private _toastr: ToastrService, private _crudService: CrudService, private ngxService: NgxUiLoaderService) { }
+
+
+  constructor(private route: ActivatedRoute,private _fb: FormBuilder, private _toastr: ToastrService, private _crudService: CrudService, private ngxService: NgxUiLoaderService, private _imageService: ImageService) { }
 
    ngOnInit() {
     this.departmentId = this.route.snapshot.paramMap.get('id');
@@ -83,19 +89,45 @@ export class UpdateDepartmentComponent implements OnInit {
   }
 
 
-  saveDepartment(){
+
+  uploadImage = () =>{
+
+ 
+    return new Promise((resolve,reject)=>{
+      this._imageService.uploadImage(this.formData).subscribe( data => {
+        let response: any = data
+        resolve(response);
+       
+      }, error =>{
+        reject(error)
+      })
+
+    })
+  }
+
+
+  saveDepartment = async () => {
 
     this.ngxService.start()
+    if(this.formData){
+      await this.uploadImage().then(()=>{
+         this.persistData();
+      })
+    }else{
+       this.persistData();
+    }
+    this.ngxService.stop();
+    
+  }
+
+
+  persistData(){
     this._crudService.updateItem({data: this.departmentForm.value, module: "department"})
     .subscribe(data => {
       this.responseData = data;
     }, error => {
-
     console.warn(error)
-    }).add(()=>{
-      this.ngxService.stop();
     })
-    
   }
 
 
@@ -105,8 +137,10 @@ export class UpdateDepartmentComponent implements OnInit {
       name: department.name,
       image_url: department.imageUrl,
       description: department.description,
-      stat : department.stat == 'active' ? true: false
+      stat : department.stat 
     })
+
+    this.status = department.stat == 'active' ? true: false;
   }
 
 

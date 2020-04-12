@@ -17,6 +17,11 @@
                     </ckeditor>
                     <mat-error *ngIf="departmentForm.get('description').invalid"> Invalid input </mat-error>
 
+                    <div class="custom-file mb-3">
+                      <input type="file" class="custom-file-input" id="customFile" name="filename" (change)="fileProgress($event)" #imageHolder >
+                      <label class="custom-file-label" for="customFile">Department Image</label>
+                    </div>
+
                       <div class="form-group  " >
                         <mat-slide-toggle (change)="isActive()" [checked]="status"    style="margin: 10px 0px  0px -500px;">Active</mat-slide-toggle>
                       </div>

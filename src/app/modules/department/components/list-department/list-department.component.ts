@@ -7,7 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CrudService } from 'src/app/shared/service/crud.service';
 import { Router } from '@angular/router';
 import { DeleteItemComponent } from 'src/app/modules/shared/delete-item/delete-item.component';
-import { ViewDepartmentComponent } from '../view-department/view-department.component';
 
 @Component({
   selector: 'app-list-department',
@@ -59,19 +58,7 @@ public doFilter = (value: string) => {
   }
 
 
-  openDepartment(department): void {
-    const dialogRef = this.dialog.open(ViewDepartmentComponent, {
-      width: '950px',
-      height: '520px',
-      data: department
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    //  console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
-
+ 
 
   deleteDepartment(id: Number){
     let data = {
