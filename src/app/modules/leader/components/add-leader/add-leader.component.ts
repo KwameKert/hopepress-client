@@ -67,41 +67,64 @@ export class AddLeaderComponent implements OnInit {
     };
   }
 
-  saveLeader = async () =>{
-    
-    this.ngxService.start();
-    
-    await this.uploadImage()
-    
-    this._crudService.addItem(this.leaderForm.value, "leader")
-                      .subscribe(data => {
-                        this.responseData = data;
-                        this.leaderForm.reset();
-                        this.previewUrl = null;
-                      }, error => {
-
-                      console.warn(error)
-                      }).add(() => {
-                        this.ngxService.stop()
-                      })
-  }
+ 
 
 
   uploadImage(){
 
-     this._imageService.uploadImage(this.formData).subscribe(data =>{
-      let response: any = data
-      this.leaderForm.patchValue({
-        image_url: response.data.link
-      });
-      //this.imgURL = response.link
-    }, error=>{
-      console.warn(error)
+    return new Promise((resolve,reject)=>{
+      this._imageService.uploadImage(this.formData).subscribe(data =>{
+        let response: any = data
+        this.leaderForm.patchValue({
+          image_url: response.data.link
+        });
+        resolve(true)
+      }, error=>{
+        console.warn(error)
+        reject(false)
+      })
+
+
     })
+  
 
   }
 
 
+
+  persitData(){
+
+    this._crudService.addItem(this.leaderForm.value, "leader")
+    .subscribe(data => {
+      this.responseData = data;
+      this.leaderForm.reset();
+      this.previewUrl = null;
+    }, error => {
+
+    console.warn(error)
+    })
+  }
+
+
+
+  saveLeader = async () =>{
+    
+    this.ngxService.start();
+
+    if(this.formData){
+      await this.uploadImage().then(()=>{
+        this.persitData();
+      }).catch(()=>{
+        this.persitData()
+      })
+    }else{
+      this.persitData()
+    }
+    
+    
+    this.ngxService.stop()
+   
+  }
 
 
   fileProgress(fileInput: any) {
