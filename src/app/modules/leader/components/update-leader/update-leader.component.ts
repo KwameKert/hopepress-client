@@ -111,9 +111,8 @@ export class UpdateLeaderComponent implements OnInit {
 
     this._crudService.updateItem({data: this.leaderForm.value,module: "leader"})
     .subscribe(data => {
-      this.responseData = data;
-      this.leaderForm.reset();
-      this.previewUrl = null;
+      console.log("updated")
+    
     }, error => {
 
     console.warn(error)
@@ -190,6 +189,10 @@ export class UpdateLeaderComponent implements OnInit {
       this.leaderForm.patchValue({
         stat : this.status ? 'active' : 'inactive'
       })
+
+      console.log(this.leaderForm.value,this.status)
+
+
     }
 
 
@@ -206,8 +209,11 @@ export class UpdateLeaderComponent implements OnInit {
         description: leader.description,
         image_url: leader.image_url,
         department_id: leader.dep_id,
-        stat: leader.stat
+        stat : leader.stat == 'active' ? true: false,
       })
+
+      leader.stat == 'active' ? this.status = true: this.status = false;
+      
 
     }
 

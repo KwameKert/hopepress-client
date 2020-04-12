@@ -73,10 +73,14 @@ export class UpdateEventComponent implements OnInit {
       name: event.name,
       description: event.description,
       imageUrl: event.imageUrl,
-      stat : event.stat == 'active' ? true: false,
+      stat : event.stat,
       startDate: this.getLocalDate(event.startDate),
       endDate: this.getLocalDate(event.endDate),
     })
+
+    this.status = event.stat == 'active' ? true: false;
+
+    //console.log(this.eventForm.value)
 
     this.previewUrl = event.imageUrl
   }
@@ -135,9 +139,13 @@ export class UpdateEventComponent implements OnInit {
  saveEvent = async ()=> {
 
    this.ngxService.start();
+   if(this.formData){
     await this.uploadImage().then(()=>{
       this.persistData()
     });
+  }else{
+    this.persistData();
+  }
 
     this.ngxService.stop()
 
