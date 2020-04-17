@@ -19,6 +19,7 @@ import { CountdownModule } from 'ngx-countdown';
     CommonModule,
     SettingsRoutingModule,
     SharedModule,
+    CountdownModule,
     CountdownModule
   ],
   exports : [

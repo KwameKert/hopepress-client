@@ -29,6 +29,8 @@ export class DashboardComponent implements OnInit {
   pageEvent: PageEvent;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+
+
   constructor(private _toastr: ToastrService,  public dialog: MatDialog, private _crudService: CrudService, private _dashboardService: SettingsService) { }
 
   ngOnInit() {
