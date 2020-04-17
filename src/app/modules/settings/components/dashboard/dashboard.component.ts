@@ -5,6 +5,7 @@ import { ViewEventComponent } from 'src/app/modules/event/components/view-event/
 import { MatDialog } from '@angular/material/dialog';
 import { CrudService } from 'src/app/shared/service';
 import { MatTableDataSource } from '@angular/material/table';
+import { SettingsService } from '../../settings.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,10 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('cd', { static: false }) private countdown;
-  leftTime = 30;
+
+  leftTime: number= 187;
+  sermonCount: number = 0;
+  eventCount: number = 0;
   status: boolean = true;
   found: boolean = false;
     
@@ -25,12 +29,14 @@ export class DashboardComponent implements OnInit {
   pageEvent: PageEvent;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private _toastr: ToastrService,  public dialog: MatDialog, private _crudService: CrudService) { }
+  constructor(private _toastr: ToastrService,  public dialog: MatDialog, private _crudService: CrudService, private _dashboardService: SettingsService) { }
 
   ngOnInit() {
    
     this.isLoading  = true;
     this.listEvents(null);
+    this.loadComponents();
+
    
   }
 
@@ -53,6 +59,20 @@ export class DashboardComponent implements OnInit {
     })
 
    
+  }
+
+  loadComponents(){
+    this._dashboardService.getDashBoard().subscribe(data=>{
+        if(data.status == 302){
+          this.sermonCount = data.data.sermonCount,
+          this.eventCount = data.data.eventCount
+         this.leftTime = Math.round(parseInt(data.data.nextEvent))
+
+         console.log(data.data.nextEvent)
+        }
+    }, error=>{
+      console.error(error)
+    })
   }
 
 public doFilter = (value: string) => {
