@@ -9,15 +9,16 @@
     <br>
     <mat-divider></mat-divider>
     <div class="text-center">
-        <a  mat-list-item  routerLinkActive="is-active" active  (click)="changeName('Dashboard')" routerLink="/dashboard">  <mat-icon class="sidebar-icon">home</mat-icon  > Dashboard</a>
 
-        <a  mat-list-item  routerLinkActive="list-item-active"  routerLinkActive="is-active"   (click)="changeName('Sermon')"   routerLink="/sermons/list">  <mat-icon class="sidebar-icon">subscriptions</mat-icon  > Semon</a>
+        <a  mat-list-item  routerLinkActive="is-active" active  (click)="setLinkName('dashboard')" >  <mat-icon class="sidebar-icon">home</mat-icon  > Dashboard</a>
 
-        <a  mat-list-item  routerLinkActive="is-active"   (click)="changeName('Event')"  routerLink="/events/list">  <mat-icon class="sidebar-icon">event</mat-icon  > Event</a>
+        <a  mat-list-item  routerLinkActive="is-active"  (click)="setLinkName('sermon')"  >  <mat-icon class="sidebar-icon">subscriptions</mat-icon  > Sermon</a>
 
-        <a  mat-list-item  routerLinkActive="is-active"  (click)="changeName('Department')"  routerLink="/departments/list">  <mat-icon class="sidebar-icon">business</mat-icon  > Department</a>
+        <a  mat-list-item  routerLinkActive="is-active"   (click)="setLinkName('event')" >  <mat-icon class="sidebar-icon">event</mat-icon  > Event</a>
 
-        <a  mat-list-item  routerLinkActive="is-active"   (click)="changeName('Leader')"  routerLink="/leaders/list">  <mat-icon class="sidebar-icon">supervised_user_circle</mat-icon  > Leader</a>
+        <a  mat-list-item  routerLinkActive="is-active"  (click)="setLinkName('department')"  >  <mat-icon class="sidebar-icon">business</mat-icon  > Department</a>
+
+        <a  mat-list-item  routerLinkActive="is-active"   (click)="setLinkName('leader')" >  <mat-icon class="sidebar-icon">supervised_user_circle</mat-icon  > Leader</a>
 
      
                

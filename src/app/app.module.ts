@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { DataService } from './shared/dataservice';
 
 @NgModule({
   declarations: [
@@ -60,8 +61,8 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   providers: [ DatePipe, 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
-  
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    DataService
   ],
   bootstrap: [AppComponent]
 })
