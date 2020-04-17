@@ -1,6 +1,10 @@
- 
+<div fxLayout="row" fxLayoutAlign="end center" >
+  <button mat-raised-button color="accent" class="float-right mb-2" routerLink="/events/add"> <mat-icon>add</mat-icon> Event</button>
+ </div>
 
 <mat-card class="mat-elevation-z3" style="margin-bottom:300px; text-align: center" >
+
+  <mat-card-title>Event List</mat-card-title>
     <mat-card-content>
     
       <div *ngIf="isLoading">

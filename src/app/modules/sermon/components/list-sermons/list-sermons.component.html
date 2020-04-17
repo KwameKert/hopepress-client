@@ -1,6 +1,9 @@
  
-
+<div fxLayout="row" fxLayoutAlign="end center" >
+  <button mat-raised-button color="accent" class="float-right mb-2" routerLink="/sermons/add"> <mat-icon>add</mat-icon> Sermon</button>
+ </div>
 <mat-card class="mat-elevation-z3" style="margin-bottom:300px; text-align: center" >
+  <mat-card-title>List Sermons</mat-card-title>
     <mat-card-content>
     
       <div *ngIf="isLoading">
