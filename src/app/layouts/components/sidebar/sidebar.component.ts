@@ -12,11 +12,11 @@ export class SidebarComponent implements OnInit {
   selectedLink: string = '';
 
   links: Array<object> = [
-    {name: 'dashboard', icon: 'home'},
-    {name: 'sermon',  icon: 'subscriptions'},
-    {name: 'event',  icon: 'event'},
-    {name: 'department',  icon: 'business'},
-    {name: 'leader', icon: 'supervised_user_circle'},
+    {name: 'dashboard',url: '/dashboard', icon: 'home'},
+    {name: 'sermon', url: '/sermons/list',  icon: 'subscriptions'},
+    {name: 'event', url: '/events/list', icon: 'event'},
+    {name: 'department', url: '/departments/list', icon: 'business'},
+    {name: 'leader', url: '/leaders/list',icon: 'supervised_user_circle'},
   ]
     
 
@@ -35,11 +35,11 @@ export class SidebarComponent implements OnInit {
 
     this._dataService.setLink(this.selectedLink);
 
-    if(name == 'dashboard'){
-      this._router.navigate(['/dashboard'])
-    }else{
-      this._router.navigate([`/${name}s/list`])
-    }
+    // if(name == 'dashboard'){
+    //   this._router.navigate(['/dashboard'])
+    // }else{
+    //   this._router.navigate([`/${name}s/list`])
+    // }
 
   }
 
