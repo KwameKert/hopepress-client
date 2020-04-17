@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,34 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  sermonLinks: boolean = false;
-  eventLinks: boolean = false;
-  departmentLinks: boolean = false;
-  leaderLinks: boolean = false;
+  @Output() linkSelected: EventEmitter<any> = new EventEmitter<any>();
+
+ 
   constructor() { }
 
   ngOnInit() {
   }
 
-  showSermonLinks(){
-    this.sermonLinks = !this.sermonLinks;
-  }
 
-  showDepartmentLinks(){
-    this.departmentLinks = !this.departmentLinks;
-  }
-
-  showLeaderLinks(){
-    this.leaderLinks = !this.leaderLinks;
-  }
-
-  showEventLinks(){
-    this.eventLinks = !this.eventLinks;
-  }
+ 
 
 
   changeName(name){
-    
+    this.linkSelected.emit(name);
   }
 
 }
