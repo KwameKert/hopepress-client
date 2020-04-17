@@ -32,4 +32,9 @@ export class SidebarComponent implements OnInit {
     this.eventLinks = !this.eventLinks;
   }
 
+
+  changeName(name){
+    
+  }
+
 }
