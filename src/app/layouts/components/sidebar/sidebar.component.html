@@ -10,7 +10,13 @@
     <mat-divider></mat-divider>
     <div class="text-center">
 
-        <a  mat-list-item  routerLinkActive="is-active" active  (click)="setLinkName('dashboard')" >  <mat-icon class="sidebar-icon">home</mat-icon  > Dashboard</a>
+        <div *ngFor="let link of links">
+
+            <a  mat-list-item  routerLinkActive="is-active"   (click)="setLinkName(link.name)" >  <mat-icon class="sidebar-icon">{{link.icon}}</mat-icon  > {{ link.name | titlecase}}</a>
+
+        </div>
+
+        <!-- <a  mat-list-item  routerLinkActive="is-active" active  (click)="setLinkName('dashboard')" >  <mat-icon class="sidebar-icon">home</mat-icon  > Dashboard</a>
 
         <a  mat-list-item  routerLinkActive="is-active"  (click)="setLinkName('sermon')"  >  <mat-icon class="sidebar-icon">subscriptions</mat-icon  > Sermon</a>
 
@@ -18,7 +24,7 @@
 
         <a  mat-list-item  routerLinkActive="is-active"  (click)="setLinkName('department')"  >  <mat-icon class="sidebar-icon">business</mat-icon  > Department</a>
 
-        <a  mat-list-item  routerLinkActive="is-active"   (click)="setLinkName('leader')" >  <mat-icon class="sidebar-icon">supervised_user_circle</mat-icon  > Leader</a>
+        <a  mat-list-item  routerLinkActive="is-active"   (click)="setLinkName('leader')" >  <mat-icon class="sidebar-icon">supervised_user_circle</mat-icon  > Leader</a> -->
 
      
                
