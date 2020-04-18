@@ -6,17 +6,11 @@ export class DataService {
 
 private messageSource = new BehaviorSubject('Dashboard');
 
-private countDown = new BehaviorSubject('CountDown')
+private countDown = new BehaviorSubject('000000')
 
 constructor(){}
 
-public changeLink(linkName: any){
-this.messageSource.next(linkName);
-}
 
-public changeCount(time: string){
-    this.countDown.next(time)
-}
 
 
 

@@ -35,11 +35,7 @@ export class SidebarComponent implements OnInit {
 
     this._dataService.setLink(this.selectedLink);
 
-    // if(name == 'dashboard'){
-    //   this._router.navigate(['/dashboard'])
-    // }else{
-    //   this._router.navigate([`/${name}s/list`])
-    // }
+    
 
   }
 

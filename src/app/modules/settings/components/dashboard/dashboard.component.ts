@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CrudService } from 'src/app/shared/service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SettingsService } from '../../settings.service';
+import { DataService } from 'src/app/shared/dataservice';
 
 
 
@@ -35,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor(private _toastr: ToastrService,  public dialog: MatDialog, private _crudService: CrudService, private _dashboardService: SettingsService) { }
+  constructor(private _toastr: ToastrService,  public dialog: MatDialog, private _crudService: CrudService, private _dashboardService: SettingsService,  private _dataService: DataService) { }
 
   ngOnInit() {
    
@@ -74,6 +75,7 @@ export class DashboardComponent implements OnInit {
           this.eventCount = data.data.eventCount
          this.timeLeft = Math.round(parseInt(data.data.nextEvent))
         this.countDown(this.timeLeft)
+        this._dataService.setCountDown(data.data.nextEvent);
         }
     }, error=>{
       console.error(error)
