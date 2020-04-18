@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/dataservice';
+import { SettingsService } from 'src/app/modules/settings/settings.service';
 
 
 @Component({
@@ -13,14 +14,16 @@ export class DefaultComponent implements OnInit {
   timeString: string = '';
   sideBarOpen = true;
 
-  constructor(private _dataService: DataService) { 
+  constructor(private _dataService: DataService, private _settingService: SettingsService) { 
     
     this._dataService.getLink().subscribe(data=>{
       this.currentLink = data;
     })
-    this._dataService.getCountDown().subscribe(data=>{
-      this.countDown(data);
+
+    this._settingService.getNextEvent().subscribe(data=>{
+      this.countDown(data.data);
     })
+    
 
   }
 
@@ -79,8 +82,8 @@ export class DefaultComponent implements OnInit {
 
 
   countDown(time){
-    time = Math.floor(time/1000)
-      var interval = setInterval(() => { 
+
+    setInterval(() => { 
         if(time > 0){
 
           this.convertToString(time--)

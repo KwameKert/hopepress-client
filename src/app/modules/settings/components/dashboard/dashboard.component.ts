@@ -18,11 +18,10 @@ import { DataService } from 'src/app/shared/dataservice';
 export class DashboardComponent implements OnInit {
   @ViewChild('cd', { static: false }) private countdown;
 
-  timeString: string = '';
-  date = new Date('2019-05-26T00:00:00');
-  timeLeft: number =  0;
+
   sermonCount: number = 0;
   eventCount: number = 0;
+  departmentCount: number = 0;
   status: boolean = true;
   found: boolean = false;
     
@@ -73,9 +72,8 @@ export class DashboardComponent implements OnInit {
         if(data.status == 302){
           this.sermonCount = data.data.sermonCount,
           this.eventCount = data.data.eventCount
-         this.timeLeft = Math.round(parseInt(data.data.nextEvent))
-        this.countDown(this.timeLeft)
         this._dataService.setCountDown(data.data.nextEvent);
+        this.departmentCount = data.data.departmentCount;
         }
     }, error=>{
       console.error(error)
@@ -106,37 +104,6 @@ public doFilter = (value: string) => {
   if(event.left < 1){
     console.log("Counter done")
   }  
-  }
-
-
-  config = {leftTime: 6535244769.9, clock: ['d', 100, 2, 'h', 100, 2, 'm', 60, 2, 's', 60, 2, 'u', 10, 1] }
-
-  //convert seconds
-
-  convertToString(time){
-    let day =  Math.floor(time / (24 * 3600))
-
-    time %= (24 * 3600)
-
-    let hour = Math.floor(time / 3600);
-
-    time %= 3600;
-
-    let minutes = Math.floor(time / 60) ; 
-  
-    time  %= 60; 
-    let seconds = time; 
-
-    this.timeString = `${day}d : ${hour}h : ${minutes}m  : ${seconds}s`;
-
-    //console.log()
-  }
-
-
-  countDown(time){
-    var interval = setInterval(() => { 
-        this.convertToString(time--)
-    },1000);
   }
 
 
