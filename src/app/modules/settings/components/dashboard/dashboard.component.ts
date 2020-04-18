@@ -7,6 +7,8 @@ import { CrudService } from 'src/app/shared/service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SettingsService } from '../../settings.service';
 
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,7 +17,9 @@ import { SettingsService } from '../../settings.service';
 export class DashboardComponent implements OnInit {
   @ViewChild('cd', { static: false }) private countdown;
 
-  leftTime: number= 187;
+  timeString: string = '';
+  date = new Date('2019-05-26T00:00:00');
+  timeLeft: number =  0;
   sermonCount: number = 0;
   eventCount: number = 0;
   status: boolean = true;
@@ -68,9 +72,8 @@ export class DashboardComponent implements OnInit {
         if(data.status == 302){
           this.sermonCount = data.data.sermonCount,
           this.eventCount = data.data.eventCount
-         this.leftTime = Math.round(parseInt(data.data.nextEvent))
-
-         console.log(data.data.nextEvent)
+         this.timeLeft = Math.round(parseInt(data.data.nextEvent))
+        this.countDown(this.timeLeft)
         }
     }, error=>{
       console.error(error)
@@ -104,8 +107,35 @@ public doFilter = (value: string) => {
   }
 
 
+  config = {leftTime: 6535244769.9, clock: ['d', 100, 2, 'h', 100, 2, 'm', 60, 2, 's', 60, 2, 'u', 10, 1] }
+
+  //convert seconds
+
+  convertToString(time){
+    let day =  Math.floor(time / (24 * 3600))
+
+    time %= (24 * 3600)
+
+    let hour = Math.floor(time / 3600);
+
+    time %= 3600;
+
+    let minutes = Math.floor(time / 60) ; 
+  
+    time  %= 60; 
+    let seconds = time; 
+
+    this.timeString = `${day}d : ${hour}h : ${minutes}m  : ${seconds}s`;
+
+    //console.log()
+  }
 
 
+  countDown(time){
+    var interval = setInterval(() => { 
+        this.convertToString(time--)
+    },1000);
+  }
 
 
 }
