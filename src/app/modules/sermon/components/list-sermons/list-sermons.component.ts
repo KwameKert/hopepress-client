@@ -39,7 +39,6 @@ export class ListSermonsComponent implements OnInit {
       if(this.responseData.data != null){
         this.responseData = data;
         this.dataSource = new MatTableDataSource(this.responseData.data);
-        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.showTable=true;
       }

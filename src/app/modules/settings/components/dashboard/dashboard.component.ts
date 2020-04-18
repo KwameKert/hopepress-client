@@ -5,6 +5,10 @@ import { ViewEventComponent } from 'src/app/modules/event/components/view-event/
 import { MatDialog } from '@angular/material/dialog';
 import { CrudService } from 'src/app/shared/service';
 import { MatTableDataSource } from '@angular/material/table';
+import { SettingsService } from '../../settings.service';
+import { DataService } from 'src/app/shared/dataservice';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +17,11 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('cd', { static: false }) private countdown;
-  leftTime = 30;
+
+
+  sermonCount: number = 0;
+  eventCount: number = 0;
+  departmentCount: number = 0;
   status: boolean = true;
   found: boolean = false;
     
@@ -25,12 +33,16 @@ export class DashboardComponent implements OnInit {
   pageEvent: PageEvent;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private _toastr: ToastrService,  public dialog: MatDialog, private _crudService: CrudService) { }
+
+
+  constructor(private _toastr: ToastrService,  public dialog: MatDialog, private _crudService: CrudService, private _dashboardService: SettingsService,  private _dataService: DataService) { }
 
   ngOnInit() {
    
     this.isLoading  = true;
     this.listEvents(null);
+    this.loadComponents();
+
    
   }
 
@@ -53,6 +65,19 @@ export class DashboardComponent implements OnInit {
     })
 
    
+  }
+
+  loadComponents(){
+    this._dashboardService.getDashBoard().subscribe(data=>{
+        if(data.status == 302){
+          this.sermonCount = data.data.sermonCount,
+          this.eventCount = data.data.eventCount
+        this._dataService.setCountDown(data.data.nextEvent);
+        this.departmentCount = data.data.departmentCount;
+        }
+    }, error=>{
+      console.error(error)
+    })
   }
 
 public doFilter = (value: string) => {
@@ -80,10 +105,6 @@ public doFilter = (value: string) => {
     console.log("Counter done")
   }  
   }
-
-
-
-
 
 
 }

@@ -5,8 +5,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CounterComponent } from './components/counter/counter.component';
-import { CountdownModule } from 'ngx-countdown';
-
 
 
 @NgModule({
@@ -18,9 +16,9 @@ import { CountdownModule } from 'ngx-countdown';
   imports: [
     CommonModule,
     SettingsRoutingModule,
-    SharedModule,
-    CountdownModule
+    SharedModule
   ],
+  
   exports : [
     DashboardComponent
   ]

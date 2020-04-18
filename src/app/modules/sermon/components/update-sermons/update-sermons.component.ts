@@ -68,7 +68,7 @@ export class UpdateSermonsComponent implements OnInit {
     })
 
 
-    sermon.stat == 'true' ? this.status = true: this.status = false;
+    sermon.stat == 'active' ? this.status = true: this.status = false;
       
   }
 

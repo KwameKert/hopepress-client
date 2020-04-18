@@ -9,107 +9,18 @@
     <br>
     <mat-divider></mat-divider>
     <div class="text-center">
-        <a  mat-list-item  routerLinkActive="list-item-active"   active   routerLink="/dashboard">  <mat-icon class="sidebar-icon">home</mat-icon  > Dashboard</a>
 
-        <a  mat-list-item  routerLinkActive="list-item-active" (click)="showSermonLinks()" data-toggle="collapse" href="#sermonLinks">	
-            
-            
+        <div *ngFor="let link of links">
 
+            <a  mat-list-item  routerLinkActive="is-active" [routerLink]="[link.url]"  (click)="setLinkName(link.name)" >  <mat-icon class="sidebar-icon">{{link.icon}}</mat-icon  > {{ link.name | titlecase}}</a>
 
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <mat-icon > subscriptions</mat-icon>
-                </div>
-                <div class="col-md-8">
-                    Sermon 
-                </div>
-                <div class="col-md-2 float-right ">
-                   <mat-icon class="li-icon" [style.display]="sermonLinks ? 'none':'block'"  >keyboard_arrow_right</mat-icon>  <mat-icon class="li-icon" [style.display]="sermonLinks ? 'block':'none'" >keyboard_arrow_down</mat-icon>
-                </div>
-            </div>
-           </a>
-            <div class="collapse sub-menu" id="sermonLinks" >
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/sermons/add"> <mat-icon>add</mat-icon>  Add Sermon</a></li>
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/sermons/list"> <mat-icon>add</mat-icon>  List Sermons</a></li>
-              </div>
+        </div>
 
-
-
-
-        <a  mat-list-item  routerLinkActive="list-item-active" (click)="showEventLinks()" data-toggle="collapse" href="#eventLinks"> 
-            
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <mat-icon > event</mat-icon>
-                </div>
-                <div class="col-md-8 ">
-                    Event &nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="col-md-2 float-right ">
-                    <mat-icon class="li-icon" [style.display]="eventLinks ? 'none':'block'"  >keyboard_arrow_right</mat-icon>  <mat-icon class="li-icon" [style.display]="eventLinks ? 'block':'none'" >keyboard_arrow_down</mat-icon>
-                </div>
-            </div>
-            
-           </a>
-            <div class="collapse sub-menu"  id="eventLinks"  >
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/events/add"> <mat-icon>add</mat-icon>  Add Event</a></li>
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/events/list"> <mat-icon>add</mat-icon>  List Events</a></li>
-              </div>
-
-
-              
-
-        <a  mat-list-item  routerLinkActive="list-item-active" (click)="showDepartmentLinks()" data-toggle="collapse" href="#departmentLinks"> 
-            
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <mat-icon > business</mat-icon>
-                </div>
-                <div class="col-md-7">
-                    Department 
-                </div>
-                <div class="col-md-2 float-right ">
-                    <mat-icon class="li-icon" [style.display]="departmentLinks ? 'none':'block'"  >keyboard_arrow_right</mat-icon>  <mat-icon class="li-icon" [style.display]="departmentLinks ? 'block':'none'" >keyboard_arrow_down</mat-icon>
-                </div>
-            </div>
-            
-           </a>
-            <div class="collapse sub-menu"  id="departmentLinks"  >
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/departments/add"> <mat-icon>add</mat-icon>  Add Department</a></li>
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/departments/list"> <mat-icon>add</mat-icon>  List Departments</a></li>
-              </div>
-
-
-        <a  mat-list-item  routerLinkActive="list-item-active" (click)="showLeaderLinks()" data-toggle="collapse" href="#leaderLinks"> 
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <mat-icon >supervised_user_circle</mat-icon>
-                </div>
-                <div class="col-md-8 ">
-                    Leaders 
-                </div>
-                <div class="col-md-2 float-right ">
-                    <mat-icon class="li-icon" [style.display]="leaderLinks ? 'none':'block'"  >keyboard_arrow_right</mat-icon>  <mat-icon class="li-icon" [style.display]="leaderLinks ? 'block':'none'" >keyboard_arrow_down</mat-icon>
-                </div>
-            </div>
-            </a>
-            <div class="collapse sub-menu " id="leaderLinks" >
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/leaders/add"> <mat-icon>add</mat-icon>  Add Leader</a></li>
-                <li><a  mat-list-item  routerLinkActive="list-item-active" routerLink="/leaders/list"> <mat-icon>add</mat-icon>  List Leaders</a></li>
-              </div>
-               
     </div>
 
 
 <mat-divider></mat-divider>
     
-<h2 matSubheader> Tools </h2>
-<a  mat-list-item  routerLinkActive="list-item-active" routerLink="/">
-    <mat-icon>import_contacts</mat-icon> Contact Us</a>
 
-    <a  mat-list-item  routerLinkActive="list-item-active" routerLink="/">
-        <mat-icon>contact_phone</mat-icon> Leads</a>
-
-<mat-divider></mat-divider>
 </mat-nav-list>
 

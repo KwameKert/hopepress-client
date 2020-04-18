@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import { DataService } from 'src/app/shared/dataservice';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,29 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  sermonLinks: boolean = false;
-  eventLinks: boolean = false;
-  departmentLinks: boolean = false;
-  leaderLinks: boolean = false;
-  constructor() { }
+  selectedLink: string = '';
+
+  links: Array<object> = [
+    {name: 'dashboard',url: '/dashboard', icon: 'home'},
+    {name: 'sermon', url: '/sermons/list',  icon: 'subscriptions'},
+    {name: 'event', url: '/events/list', icon: 'event'},
+    {name: 'department', url: '/departments/list', icon: 'business'},
+    {name: 'leader', url: '/leaders/list',icon: 'supervised_user_circle'},
+  ]
+    
+
+ 
+  constructor(private _router: Router, private _dataService: DataService) { }
 
   ngOnInit() {
   }
 
-  showSermonLinks(){
-    this.sermonLinks = !this.sermonLinks;
+
+
+
+  setLinkName(name: string){
+
+    this.selectedLink = name;
+
+    this._dataService.setLink(this.selectedLink);
+
+    
+
   }
 
-  showDepartmentLinks(){
-    this.departmentLinks = !this.departmentLinks;
-  }
-
-  showLeaderLinks(){
-    this.leaderLinks = !this.leaderLinks;
-  }
-
-  showEventLinks(){
-    this.eventLinks = !this.eventLinks;
-  }
 
 }
