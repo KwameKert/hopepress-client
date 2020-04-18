@@ -11,7 +11,7 @@ import { SettingsService } from 'src/app/modules/settings/settings.service';
 export class DefaultComponent implements OnInit {
 
   currentLink: any  = '';
-  timeString: string = '';
+  timeString: string = null;
   sideBarOpen = true;
 
   constructor(private _dataService: DataService, private _settingService: SettingsService) { 
@@ -45,36 +45,40 @@ export class DefaultComponent implements OnInit {
 
 
   convertToString(time){
-    let day =  Math.floor(time / (24 * 3600))
 
-    time %= (24 * 3600)
+    if(time){
+      let day =  Math.floor(time / (24 * 3600))
 
-    let hour = Math.floor(time / 3600);
-
-    time %= 3600;
-
-    let minutes = Math.floor(time / 60) ; 
+      time %= (24 * 3600)
   
-    time  %= 60; 
-    let seconds = time; 
-
-    if(seconds > 0){
-      this.timeString = ` ${seconds}s`;
+      let hour = Math.floor(time / 3600);
+  
+      time %= 3600;
+  
+      let minutes = Math.floor(time / 60) ; 
+    
+      time  %= 60; 
+      let seconds = time; 
+  
+      if(seconds > 0){
+        this.timeString = ` ${seconds}s`;
+      }
+  
+      if(minutes > 0){
+  
+        this.timeString  = `${minutes}m  :`+ this.timeString;
+      }
+  
+      if( hour > 0) {
+  
+        this.timeString  = `${hour}h :`+ this.timeString;
+      }
+  
+      if(day > 0){
+        this.timeString  = `${day}d :`+ this.timeString;
+      }
     }
 
-    if(minutes > 0){
-
-      this.timeString  = `${minutes}m  :`+ this.timeString;
-    }
-
-    if( hour > 0) {
-
-      this.timeString  = `${hour}h :`+ this.timeString;
-    }
-
-    if(day > 0){
-      this.timeString  = `${day}d :`+ this.timeString;
-    }
   
 
     //console.log()
