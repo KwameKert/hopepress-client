@@ -18,19 +18,36 @@ constructor(private _httpClient: HttpClient){}
 
 
 
-
-
 getCountDown(): Observable<any>{
     return this.countDown.asObservable();
-}
-setCountDown(time: string){
-    this.countDown.next(time);
-}
-getLink(): Observable<any> {
 
+}
+
+
+ setCountDown(){
+    return new Promise((resolve,reject)=>{
+        this.getNextEvent().subscribe(data=>{
+            this.countDown.next(data.data)
+            resolve(true)
+        })
+    })
+        
+}
+
+
+// setCountDown  ()  {
+//     return new Promise((resolve,reject)=>{
+
+//         this.getNextEvent().subscribe(data=>{
+//             resolve(data.data)
+//         })
+//     })
+    
+// }
+
+getLink(): Observable<any> {
     return this.messageSource.asObservable();
 }
-
 
 setLink(linkName: string){
     this.messageSource.next(linkName)
@@ -38,6 +55,11 @@ setLink(linkName: string){
 
 public getNextEvent(): Observable<any>{
     return this._httpClient.get(`${this._baseUrl}/dashboard/nextEvent`);
-  }
+}
+
+
+
+
+
 
 } 
