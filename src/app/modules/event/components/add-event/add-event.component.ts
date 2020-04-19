@@ -3,6 +3,7 @@ import {FormBuilder, Validators, FormControl, NgForm} from '@angular/forms';
 import { CrudService, ImageService } from 'src/app/shared/service/index';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { DataService } from 'src/app/shared/dataservice';
 
 @Component({
   selector: 'app-add-event',
@@ -22,7 +23,7 @@ export class AddEventComponent implements OnInit {
   previewUrl:any = null;
 
 
-    constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService) {
+    constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService, private _dataService: DataService) {
     this.mycontent = `<p>Description Here</p>`;
   }
 
@@ -94,6 +95,7 @@ export class AddEventComponent implements OnInit {
    
       this._crudService.addItem(this.eventForm.value,"event").subscribe(data=>{
 
+        this._dataService.resetCounter();
         this.myForm.resetForm();
         this.previewUrl = null;
         

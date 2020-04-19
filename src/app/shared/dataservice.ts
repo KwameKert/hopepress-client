@@ -12,38 +12,26 @@ private _baseUrl :String = environment.api_host;
 
 private messageSource = new BehaviorSubject('Dashboard');
 
-private countDown = new BehaviorSubject('000000')
+private counter: number = 0;
 
 constructor(private _httpClient: HttpClient){}
 
 
-
-getCountDown(): Observable<any>{
-    return this.countDown.asObservable();
-
+get CountDown(): number{
+    return this.counter
 }
 
 
  setCountDown(){
     return new Promise((resolve,reject)=>{
         this.getNextEvent().subscribe(data=>{
-            this.countDown.next(data.data)
+            this.counter = data.data
             resolve(true)
         })
     })
         
 }
 
-
-// setCountDown  ()  {
-//     return new Promise((resolve,reject)=>{
-
-//         this.getNextEvent().subscribe(data=>{
-//             resolve(data.data)
-//         })
-//     })
-    
-// }
 
 getLink(): Observable<any> {
     return this.messageSource.asObservable();
@@ -59,7 +47,10 @@ public getNextEvent(): Observable<any>{
 
 
 
-
+public resetCounter(){
+    console.log("Reset")
+    this.setCountDown();
+}
 
 
 } 

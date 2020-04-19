@@ -28,31 +28,19 @@ export class DefaultComponent implements OnInit {
       this.currentLink = data;
     })
 
-    this._dataService.setCountDown().then(()=>{
-      this._dataService.getCountDown().subscribe(data=>{
-        console.log("From default" , data)
-        this.countDown(data)
-      })
-    })
-
-   
     
-  //this.loadCounter();
 
-    // this._dataService.getCountDown().subscribe(data=>{
-    //    this.countDown(data);
-    // })                 
-
-
-  }
-
-
-  loadCounter () {
-     this._dataService.setCountDown().then((data)=>{
-      this.countDown(data)
-  })
+    this._dataService.setCountDown().then(()=>{
+      this.countDown(this._dataService.CountDown)
+      console.log(this._dataService.CountDown)
+    })
+  
+  
+ 
 
   }
+
+
 
   toggleSidebar(){
     this.sideBarOpen = !this.sideBarOpen;
