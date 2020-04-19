@@ -72,7 +72,6 @@ export class DashboardComponent implements OnInit {
         if(data.status == 302){
           this.sermonCount = data.data.sermonCount,
           this.eventCount = data.data.eventCount
-        this._dataService.setCountDown(data.data.nextEvent);
         this.departmentCount = data.data.departmentCount;
         }
     }, error=>{

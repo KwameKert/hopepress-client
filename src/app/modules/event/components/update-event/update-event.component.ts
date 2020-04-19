@@ -4,6 +4,7 @@ import { CrudService, ImageService } from 'src/app/shared/service/index';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {ActivatedRoute} from '@angular/router';
+import { DataService } from 'src/app/shared/dataservice';
 
 @Component({
   selector: 'app-update-event',
@@ -23,7 +24,7 @@ export class UpdateEventComponent implements OnInit {
   eventId: any ;
   offset = new Date().getTimezoneOffset() * 1000 * 60
 
- constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService, private route: ActivatedRoute) {
+ constructor(private _fb: FormBuilder, private _crudService: CrudService, private _imageService: ImageService, private _toastr: ToastrService, private ngxService: NgxUiLoaderService, private route: ActivatedRoute, private _dataService: DataService) {
     this.mycontent = `<p>Description Here</p>`;
   }
 
@@ -153,9 +154,12 @@ export class UpdateEventComponent implements OnInit {
 
   persistData(){
     this._crudService.updateItem({data: this.eventForm.value,module:"event"}).subscribe(data=>{
+      
       console.log("done")
     }, error=>{
       console.error(error)
+    }).add(()=>{
+      this._dataService.resetCounter();
     })
   }
 

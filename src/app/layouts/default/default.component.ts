@@ -16,22 +16,31 @@ export class DefaultComponent implements OnInit {
 
   constructor(private _dataService: DataService, private _settingService: SettingsService) { 
     
-    this._dataService.getLink().subscribe(data=>{
-      this.currentLink = data;
-    })
-
-    this._settingService.getNextEvent().subscribe(data=>{
-      this.countDown(data.data);
-    })
+  
     
 
   }
 
 
-  ngOnInit() {
+  ngOnInit (){
 
+    this._dataService.getLink().subscribe(data=>{
+      this.currentLink = data;
+    })
+
+    
+
+    this._dataService.setCountDown().then(()=>{
+      this.countDown(this._dataService.CountDown)
+      console.log(this._dataService.CountDown)
+    })
+  
+  
+ 
 
   }
+
+
 
   toggleSidebar(){
     this.sideBarOpen = !this.sideBarOpen;
@@ -79,9 +88,6 @@ export class DefaultComponent implements OnInit {
       }
     }
 
-  
-
-    //console.log()
   }
 
 

@@ -24,7 +24,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { DataService } from './shared/dataservice';
-import {MatTooltipModule} from '@angular/material/tooltip'
 
 @NgModule({
   declarations: [
@@ -57,7 +56,6 @@ import {MatTooltipModule} from '@angular/material/tooltip'
     MatPaginatorModule,
     HttpClientModule,
     NgxUiLoaderModule,
-    MatTooltipModule,
     ToastrModule.forRoot(), 
     
   ],
